@@ -1,0 +1,23 @@
+{
+  "name": "@digitaldefiance-eecp/eecp-crypto",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "@digitaldefiance/ecies-lib": "^4.7.6",
+    "tslib": "^2.3.0"
+  }
+}

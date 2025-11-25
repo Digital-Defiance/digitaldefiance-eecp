@@ -1,0 +1,34 @@
+{
+  "name": "@digitaldefiance-eecp/eecp-client",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "dependencies": {
+    "@digitaldefiance-eecp/eecp-crdt": "0.0.1",
+    "@digitaldefiance-eecp/eecp-crypto": "0.0.1",
+    "@digitaldefiance-eecp/eecp-protocol": "0.0.1",
+    "@digitaldefiance/ecies-lib": "^4.7.14",
+    "tslib": "^2.3.0",
+    "ws": "^8.18.3"
+  },
+  "peerDependencies": {
+    "react": "^19.2.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    }
+  }
+}

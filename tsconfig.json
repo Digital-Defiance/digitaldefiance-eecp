@@ -1,0 +1,34 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compileOnSave": false,
+  "files": [],
+  "references": [
+    {
+      "path": "./packages/eecp-protocol"
+    },
+    {
+      "path": "./packages/eecp-crypto"
+    },
+    {
+      "path": "./packages/eecp-crdt"
+    },
+    {
+      "path": "./packages/eecp-client"
+    },
+    {
+      "path": "./packages/eecp-server-e2e"
+    },
+    {
+      "path": "./packages/eecp-server"
+    },
+    {
+      "path": "./packages/eecp-cli-e2e"
+    },
+    {
+      "path": "./packages/eecp-cli"
+    },
+    {
+      "path": "./packages/eecp-demo"
+    }
+  ]
+}

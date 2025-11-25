@@ -1,0 +1,124 @@
+.encryption-indicator {
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.encryption-status {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.status-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.status-icon {
+  font-size: 2rem;
+}
+
+.status-info {
+  flex: 1;
+}
+
+.status-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.status-label {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.recent-events {
+  margin-bottom: 1.5rem;
+}
+
+.recent-events h5 {
+  margin: 0 0 1rem 0;
+  color: #1a1a1a;
+  font-size: 1rem;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.event-item.encrypt {
+  border-left: 4px solid #3b82f6;
+}
+
+.event-item.decrypt {
+  border-left: 4px solid #10b981;
+}
+
+.event-icon {
+  font-size: 1.5rem;
+}
+
+.event-details {
+  flex: 1;
+}
+
+.event-type {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.event-participant {
+  font-size: 0.875rem;
+  color: #666;
+}
+
+.encryption-info {
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.info-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.info-icon {
+  font-size: 1.5rem;
+}
+
+.info-content {
+  flex: 1;
+}
+
+.info-title {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.info-description {
+  font-size: 0.875rem;
+  color: #666;
+}

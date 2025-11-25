@@ -1,0 +1,119 @@
+{
+  "name": "@digitaldefiance-eecp/eecp-cli",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "bin": {
+    "eecp": "./dist/cli.js"
+  },
+  "nx": {
+    "targets": {
+      "build": {
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
+        "defaultConfiguration": "production",
+        "options": {
+          "platform": "node",
+          "outputPath": "packages/eecp-cli/dist",
+          "format": [
+            "esm"
+          ],
+          "bundle": false,
+          "main": "packages/eecp-cli/src/main.ts",
+          "additionalEntryPoints": [
+            "packages/eecp-cli/src/cli.ts"
+          ],
+          "tsConfig": "packages/eecp-cli/tsconfig.app.json",
+          "assets": [
+            "packages/eecp-cli/src/assets"
+          ],
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        },
+        "configurations": {
+          "development": {},
+          "production": {
+            "esbuildOptions": {
+              "sourcemap": false,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
+          }
+        }
+      },
+      "prune-lockfile": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "executor": "@nx/js:prune-lockfile",
+        "outputs": [
+          "{workspaceRoot}/packages/eecp-cli/dist/package.json",
+          "{workspaceRoot}/packages/eecp-cli/dist/yarn.lock"
+        ],
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "copy-workspace-modules": {
+        "dependsOn": [
+          "build"
+        ],
+        "cache": true,
+        "outputs": [
+          "{workspaceRoot}/packages/eecp-cli/dist/workspace_modules"
+        ],
+        "executor": "@nx/js:copy-workspace-modules",
+        "options": {
+          "buildTarget": "build"
+        }
+      },
+      "prune": {
+        "dependsOn": [
+          "prune-lockfile",
+          "copy-workspace-modules"
+        ],
+        "executor": "nx:noop"
+      },
+      "serve": {
+        "continuous": true,
+        "executor": "@nx/js:node",
+        "defaultConfiguration": "development",
+        "dependsOn": [
+          "build"
+        ],
+        "options": {
+          "buildTarget": "@digitaldefiance-eecp/eecp-cli:build",
+          "runBuildTargetDependencies": false
+        },
+        "configurations": {
+          "development": {
+            "buildTarget": "@digitaldefiance-eecp/eecp-cli:build:development"
+          },
+          "production": {
+            "buildTarget": "@digitaldefiance-eecp/eecp-cli:build:production"
+          }
+        }
+      },
+      "test": {
+        "options": {
+          "passWithNoTests": true
+        }
+      }
+    }
+  },
+  "dependencies": {
+    "@digitaldefiance-eecp/eecp-client": "*",
+    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "@digitaldefiance/ecies-lib": "^4.7.14",
+    "commander": "^14.0.2",
+    "express": "^4.21.2"
+  }
+}

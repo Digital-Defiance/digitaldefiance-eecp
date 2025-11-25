@@ -1,0 +1,143 @@
+.participant-panel {
+  padding: 1.5rem;
+}
+
+.participant-panel h3 {
+  margin: 0 0 0.5rem 0;
+  color: #1a1a1a;
+  font-size: 1.5rem;
+}
+
+.panel-description {
+  color: #666;
+  margin-bottom: 1.5rem;
+}
+
+.participants-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.participant-box {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #f9fafb;
+  border-radius: 12px;
+  border: 2px solid #e5e7eb;
+  transition: all 0.2s;
+}
+
+.participant-box:hover {
+  border-color: #667eea;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.1);
+}
+
+.participant-visual {
+  position: relative;
+}
+
+.participant-circle {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 700;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.status-indicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+
+.status-indicator.online {
+  background: #10b981;
+}
+
+.status-indicator.offline {
+  background: #6b7280;
+}
+
+.participant-details {
+  flex: 1;
+}
+
+.participant-name {
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 0.25rem;
+}
+
+.participant-status {
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.participant-status.online {
+  color: #10b981;
+}
+
+.participant-status.offline {
+  color: #6b7280;
+}
+
+.participant-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.control-btn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.control-btn:hover {
+  transform: translateY(-2px);
+}
+
+.control-btn.connect {
+  background: #10b981;
+  color: white;
+}
+
+.control-btn.connect:hover {
+  background: #059669;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.control-btn.send {
+  background: #3b82f6;
+  color: white;
+}
+
+.control-btn.send:hover {
+  background: #2563eb;
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.control-btn.disconnect {
+  background: #ef4444;
+  color: white;
+}
+
+.control-btn.disconnect:hover {
+  background: #dc2626;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}

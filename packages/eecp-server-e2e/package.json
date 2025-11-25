@@ -1,0 +1,26 @@
+{
+  "name": "@digitaldefiance-eecp/eecp-server-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@digitaldefiance-eecp/eecp-server"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "packages/eecp-server-e2e/jest.config.cts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@digitaldefiance-eecp/eecp-server:build",
+          "@digitaldefiance-eecp/eecp-server:serve"
+        ]
+      }
+    }
+  }
+}

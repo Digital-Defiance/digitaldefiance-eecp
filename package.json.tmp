@@ -1,0 +1,10 @@
+{
+  "scripts": {
+    "build": "nx run-many --target=build --all",
+    "test": "nx run-many --target=test --all",
+    "lint": "nx run-many --target=lint --all",
+    "dev:server": "nx serve eecp-server",
+    "dev:demo": "nx serve eecp-demo",
+    "dev:cli": "nx serve eecp-cli"
+  }
+}

@@ -103,6 +103,10 @@
     }
   },
   "dependencies": {
-    "express": "^4.21.2"
+    "@digitaldefiance-eecp/eecp-crypto": "*",
+    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "express": "^4.21.2",
+    "uuid": "^13.0.0",
+    "ws": "^8.18.3"
   }
 }

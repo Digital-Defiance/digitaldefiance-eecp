@@ -16,6 +16,8 @@
     }
   },
   "dependencies": {
+    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "@digitaldefiance/ecies-lib": "^4.7.6",
     "tslib": "^2.3.0"
   }
 }

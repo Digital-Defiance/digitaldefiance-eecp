@@ -14,7 +14,22 @@ import {
   ParticipantId,
 } from '@digitaldefiance-eecp/eecp-protocol';
 import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
-import { randomUUID } from 'crypto';
+import { ECIESService, Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
+
+/**
+ * Helper function to generate a valid public key for testing
+ */
+function generateValidPublicKey(eciesService: ECIESService): Buffer {
+  const member = Member.newMember(
+    eciesService,
+    MemberType.User,
+    'Creator',
+    new EmailString('creator@example.com')
+  );
+  const publicKey = Buffer.from(member.member.publicKey);
+  member.member.dispose();
+  return publicKey;
+}
 
 // Mock ParticipantAuth for testing
 class MockParticipantAuth implements IParticipantAuth {
@@ -36,9 +51,11 @@ describe('TemporalCleanupService Property Tests', () => {
   let participantManager: IParticipantManager;
   let operationRouter: OperationRouter;
   let cleanupService: TemporalCleanupService;
+  let eciesService: ECIESService;
 
   beforeEach(() => {
-    workspaceManager = new WorkspaceManager();
+    eciesService = new ECIESService();
+    workspaceManager = new WorkspaceManager(eciesService);
     const mockAuth = new MockParticipantAuth();
     participantManager = new ParticipantManager(mockAuth);
     operationRouter = new OperationRouter(participantManager, workspaceManager);
@@ -64,11 +81,12 @@ describe('TemporalCleanupService Property Tests', () => {
   test('Property 51: Complete Workspace Cleanup', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.constantFrom(5, 15, 30, 60), // Workspace duration
+        fc.integer({ min: 5, max: 120 }), // Workspace duration (5-120 minutes)
         fc.integer({ min: 1, max: 10 }), // Number of operations to buffer
         fc.integer({ min: 1, max: 5 }), // Number of participants
         async (durationMinutes, numOperations, numParticipants) => {
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const mockAuth = new MockParticipantAuth();
           const participantManager = new ParticipantManager(mockAuth);
           const operationRouter = new OperationRouter(participantManager, workspaceManager);
@@ -77,7 +95,7 @@ describe('TemporalCleanupService Property Tests', () => {
           try {
             const now = Date.now();
             const config: WorkspaceConfig = {
-              id: randomUUID(),
+              id: GuidV4.new(),
               createdAt: now,
               expiresAt: now + durationMinutes * 60 * 1000,
               timeWindow: {
@@ -93,19 +111,19 @@ describe('TemporalCleanupService Property Tests', () => {
             // Create workspace
             const workspace = await workspaceManager.createWorkspace(
               config,
-              Buffer.from('creator-public-key')
+              generateValidPublicKey(eciesService)
             );
 
             // Create participants
             const participantIds: ParticipantId[] = [];
             for (let i = 0; i < numParticipants; i++) {
-              participantIds.push(randomUUID());
+              participantIds.push(GuidV4.new());
             }
 
             // Buffer operations for participants (simulating offline participants)
             for (let i = 0; i < numOperations; i++) {
               const operation: EncryptedOperation = {
-                id: randomUUID(),
+                id: GuidV4.new(),
                 workspaceId: workspace.id,
                 participantId: participantIds[i % numParticipants],
                 timestamp: now - 1000, // Old timestamp (before current time)
@@ -175,7 +193,8 @@ describe('TemporalCleanupService Property Tests', () => {
       fc.asyncProperty(
         fc.integer({ min: 1, max: 3 }), // Number of start/stop cycles
         async (numCycles) => {
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const mockAuth = new MockParticipantAuth();
           const participantManager = new ParticipantManager(mockAuth);
           const operationRouter = new OperationRouter(participantManager, workspaceManager);

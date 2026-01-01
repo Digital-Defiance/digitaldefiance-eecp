@@ -20,7 +20,7 @@ describe('App', () => {
       </BrowserRouter>
     );
     expect(
-      getAllByText(new RegExp('Welcome @digitaldefiance-eecp/eecp-demo', 'gi'))
+      getAllByText(/Ephemeral Encrypted Collaboration Protocol/i)
         .length > 0
     ).toBeTruthy();
   });

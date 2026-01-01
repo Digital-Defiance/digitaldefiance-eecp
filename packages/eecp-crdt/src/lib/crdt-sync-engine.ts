@@ -50,7 +50,7 @@ export class CRDTSyncEngine implements ICRDTSyncEngine {
         return a.timestamp - b.timestamp;
       }
       // Secondary sort by operation ID for deterministic tie-breaking
-      return a.id.localeCompare(b.id);
+      return a.id.toString().localeCompare(b.id.toString());
     });
     
     // Apply operations in order, skipping duplicates
@@ -82,7 +82,7 @@ export class CRDTSyncEngine implements ICRDTSyncEngine {
     }
     
     // If timestamps are equal, use operation ID for deterministic ordering
-    return op1.id.localeCompare(op2.id) < 0 ? [op1, op2] : [op2, op1];
+    return op1.id.toString().localeCompare(op2.id.toString()) < 0 ? [op1, op2] : [op2, op1];
   }
   
   /**
@@ -99,7 +99,7 @@ export class CRDTSyncEngine implements ICRDTSyncEngine {
           return a.timestamp - b.timestamp;
         }
         // Secondary sort by operation ID for deterministic ordering
-        return a.id.localeCompare(b.id);
+        return a.id.toString().localeCompare(b.id.toString());
       });
   }
   

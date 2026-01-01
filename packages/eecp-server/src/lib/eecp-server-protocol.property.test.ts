@@ -10,6 +10,7 @@ import { ParticipantManager } from './participant-manager';
 import { OperationRouter } from './operation-router';
 import { TemporalCleanupService } from './temporal-cleanup-service';
 import { RateLimiter } from './rate-limiter';
+import { MetricsService } from './metrics-service';
 import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
 import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
 import {
@@ -21,7 +22,7 @@ import {
   ZeroKnowledgeProof,
 } from '@digitaldefiance-eecp/eecp-protocol';
 import WebSocket from 'ws';
-import { Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
+import { Member, MemberType, EmailString, GuidV4, ECIESService } from '@digitaldefiance/ecies-lib';
 
 describe('EECP Server Protocol Property Tests', () => {
   let server: EECPServer;
@@ -31,6 +32,7 @@ describe('EECP Server Protocol Property Tests', () => {
   let cleanupService: TemporalCleanupService;
   let participantAuth: ParticipantAuth;
   let rateLimiter: RateLimiter;
+  let testEciesService: ECIESService;
   const port = 3002; // Use different port for property tests
   const wsUrl = `ws://localhost:${port}`;
 
@@ -50,11 +52,13 @@ describe('EECP Server Protocol Property Tests', () => {
   beforeAll(async () => {
     // Initialize dependencies
     participantAuth = new ParticipantAuth();
-    workspaceManager = new WorkspaceManager();
+    testEciesService = new ECIESService();
+    workspaceManager = new WorkspaceManager(testEciesService);
     participantManager = new ParticipantManager(participantAuth);
     operationRouter = new OperationRouter(participantManager, workspaceManager);
     cleanupService = new TemporalCleanupService(workspaceManager, operationRouter);
     rateLimiter = new RateLimiter();
+    const metricsService = new MetricsService();
 
     // Create server
     server = new EECPServer(
@@ -64,6 +68,7 @@ describe('EECP Server Protocol Property Tests', () => {
       cleanupService,
       participantAuth,
       rateLimiter,
+      metricsService,
       { port, host: 'localhost', protocolVersion: '1.0.0' }
     );
 
@@ -112,7 +117,7 @@ describe('EECP Server Protocol Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('test-key'));
+            await workspaceManager.createWorkspace(config, member.publicKey);
 
             // Connect via WebSocket
             const ws = new WebSocket(wsUrl);
@@ -225,7 +230,7 @@ describe('EECP Server Protocol Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('test-key'));
+            await workspaceManager.createWorkspace(config, member.publicKey);
 
             // Connect via WebSocket
             const ws = new WebSocket(wsUrl);
@@ -328,7 +333,7 @@ describe('EECP Server Protocol Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('test-key'));
+            await workspaceManager.createWorkspace(config, member.publicKey);
 
             // Connect via WebSocket
             const ws = new WebSocket(wsUrl);

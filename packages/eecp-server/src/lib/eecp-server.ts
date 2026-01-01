@@ -35,6 +35,7 @@ import { IOperationRouter } from './operation-router.js';
 import { ITemporalCleanupService } from './temporal-cleanup-service.js';
 import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
 import { IRateLimiter } from './rate-limiter.js';
+import { IMetricsService } from './metrics-service.js';
 
 /**
  * EECP Server configuration
@@ -64,6 +65,7 @@ export class EECPServer {
     private cleanupService: ITemporalCleanupService,
     private participantAuth: IParticipantAuth,
     private rateLimiter: IRateLimiter,
+    private metricsService: IMetricsService,
     config?: Partial<EECPServerConfig>
   ) {
     this.config = {
@@ -170,6 +172,9 @@ export class EECPServer {
 
         // Record workspace creation for rate limiting
         this.rateLimiter.recordWorkspaceCreation(ipAddress);
+
+        // Update metrics
+        this.metricsService.incrementWorkspaceCount();
 
         res.status(201).json({
           id: workspace.id,
@@ -299,11 +304,30 @@ export class EECPServer {
 
     // GET /health - Health check
     this.app.get('/health', (req: Request, res: Response) => {
+      const workspaceCount = this.workspaceManager.getWorkspaceCount();
+      const participantCount = this.participantManager.getTotalParticipantCount();
+      
       res.json({
         status: 'ok',
         timestamp: Date.now(),
         version: this.config.protocolVersion,
+        workspaces: workspaceCount,
+        participants: participantCount,
       });
+    });
+
+    // GET /metrics - Prometheus metrics
+    this.app.get('/metrics', async (req: Request, res: Response) => {
+      try {
+        res.set('Content-Type', this.metricsService.getRegistry().contentType);
+        const metrics = await this.metricsService.getMetrics();
+        res.send(metrics);
+      } catch (error) {
+        console.error('Error getting metrics:', error);
+        res.status(500).json({
+          error: error instanceof Error ? error.message : 'Failed to get metrics',
+        });
+      }
     });
   }
 
@@ -414,6 +438,7 @@ export class EECPServer {
     ws.on('close', () => {
       if (session && workspaceId) {
         this.participantManager.removeParticipant(workspaceId, session.participantId);
+        this.metricsService.decrementParticipantCount();
       }
       this.challenges.delete(challengeId);
     });
@@ -527,6 +552,9 @@ export class EECPServer {
       // Store WebSocket in session
       session.websocket = ws;
 
+      // Update metrics
+      this.metricsService.incrementParticipantCount();
+
       // Send handshake acknowledgment
       const ack: HandshakeAckMessage = {
         success: true,
@@ -558,6 +586,8 @@ export class EECPServer {
     envelope: MessageEnvelope,
     session: ParticipantSession
   ): Promise<void> {
+    const startTime = Date.now();
+    
     try {
       // Check operation rate limit
       const rateLimitResult = this.rateLimiter.checkOperationRate(
@@ -632,6 +662,11 @@ export class EECPServer {
 
       // Update last activity
       session.lastActivity = Date.now();
+
+      // Record metrics
+      this.metricsService.recordOperation();
+      const latency = Date.now() - startTime;
+      this.metricsService.recordOperationLatency(latency);
     } catch (error) {
       console.error('Operation error:', error);
       this.sendError(
@@ -639,6 +674,10 @@ export class EECPServer {
         'INVALID_OPERATION',
         error instanceof Error ? error.message : 'Failed to process operation'
       );
+      
+      // Still record latency for failed operations
+      const latency = Date.now() - startTime;
+      this.metricsService.recordOperationLatency(latency);
     }
   }
 

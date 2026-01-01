@@ -5,15 +5,36 @@
 import { WorkspaceManager } from './workspace-manager.js';
 import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
 import { randomUUID } from 'crypto';
+import { ECIESService, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
+
+/**
+ * Helper function to create a test member with proper keys
+ */
+async function createTestMember(eciesService: ECIESService): Promise<Member> {
+  const result = await Member.newMember(
+    eciesService,
+    MemberType.User,
+    'Test Creator',
+    new EmailString('creator@example.com')
+  );
+  return result.member as Member;
+}
 
 describe('WorkspaceManager Unit Tests', () => {
   let manager: WorkspaceManager;
+  let eciesService: ECIESService;
+  let testMember: Member;
 
-  beforeEach(() => {
-    manager = new WorkspaceManager();
+  beforeEach(async () => {
+    eciesService = new ECIESService();
+    manager = new WorkspaceManager(eciesService);
+    testMember = await createTestMember(eciesService);
   });
 
   afterEach(() => {
+    if (testMember) {
+      testMember.dispose();
+    }
     manager.cleanup();
   });
 
@@ -36,25 +57,25 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       expect(workspace.id).toBe(config.id);
       expect(workspace.status).toBe('active');
       expect(workspace.createdAt).toBe(config.createdAt);
       expect(workspace.expiresAt).toBe(config.expiresAt);
-      expect(workspace.participantCount).toBe(0);
+      expect(workspace.participantCount).toBe(1); // Creator is added as participant
     });
 
-    it('should reject invalid expiration duration (not 5, 15, 30, or 60 minutes)', async () => {
+    it('should reject invalid expiration duration (less than 5 minutes)', async () => {
       const now = Date.now();
       const config: WorkspaceConfig = {
         id: randomUUID(),
         createdAt: now,
-        expiresAt: now + 20 * 60 * 1000, // 20 minutes - invalid
+        expiresAt: now + 3 * 60 * 1000, // 3 minutes - too short
         timeWindow: {
           startTime: now,
-          endTime: now + 20 * 60 * 1000,
+          endTime: now + 3 * 60 * 1000,
           rotationInterval: 15,
           gracePeriod: 60000,
         },
@@ -63,7 +84,28 @@ describe('WorkspaceManager Unit Tests', () => {
       };
 
       await expect(
-        manager.createWorkspace(config, Buffer.from('creator-public-key'))
+        manager.createWorkspace(config, testMember.publicKey)
+      ).rejects.toThrow('Invalid expiration duration');
+    });
+
+    it('should reject invalid expiration duration (more than 120 minutes)', async () => {
+      const now = Date.now();
+      const config: WorkspaceConfig = {
+        id: randomUUID(),
+        createdAt: now,
+        expiresAt: now + 150 * 60 * 1000, // 150 minutes - too long
+        timeWindow: {
+          startTime: now,
+          endTime: now + 150 * 60 * 1000,
+          rotationInterval: 15,
+          gracePeriod: 60000,
+        },
+        maxParticipants: 50,
+        allowExtension: false,
+      };
+
+      await expect(
+        manager.createWorkspace(config, testMember.publicKey)
       ).rejects.toThrow('Invalid expiration duration');
     });
 
@@ -85,20 +127,20 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
       expect(workspace.status).toBe('active');
     });
 
-    it('should accept 15 minute duration', async () => {
+    it('should accept 20 minute duration', async () => {
       const now = Date.now();
       const config: WorkspaceConfig = {
         id: randomUUID(),
         createdAt: now,
-        expiresAt: now + 15 * 60 * 1000,
+        expiresAt: now + 20 * 60 * 1000,
         timeWindow: {
           startTime: now,
-          endTime: now + 15 * 60 * 1000,
+          endTime: now + 20 * 60 * 1000,
           rotationInterval: 15,
           gracePeriod: 60000,
         },
@@ -108,20 +150,20 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
       expect(workspace.status).toBe('active');
     });
 
-    it('should accept 60 minute duration', async () => {
+    it('should accept 120 minute duration', async () => {
       const now = Date.now();
       const config: WorkspaceConfig = {
         id: randomUUID(),
         createdAt: now,
-        expiresAt: now + 60 * 60 * 1000,
+        expiresAt: now + 120 * 60 * 1000,
         timeWindow: {
           startTime: now,
-          endTime: now + 60 * 60 * 1000,
+          endTime: now + 120 * 60 * 1000,
           rotationInterval: 60,
           gracePeriod: 60000,
         },
@@ -131,7 +173,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
       expect(workspace.status).toBe('active');
     });
@@ -156,7 +198,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const created = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
       const retrieved = await manager.getWorkspace(config.id);
 
@@ -189,7 +231,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
       const originalExpiration = workspace.expiresAt;
 
@@ -217,7 +259,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       await expect(
@@ -249,7 +291,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       await expect(
@@ -277,7 +319,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       await manager.revokeWorkspace(workspace.id);
@@ -313,7 +355,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       expect(manager.isWorkspaceExpired(workspace)).toBe(false);
@@ -337,7 +379,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       expect(manager.isWorkspaceExpired(workspace)).toBe(true);
@@ -361,7 +403,7 @@ describe('WorkspaceManager Unit Tests', () => {
 
       const workspace = await manager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        testMember.publicKey
       );
 
       await manager.revokeWorkspace(workspace.id);

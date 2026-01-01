@@ -14,6 +14,7 @@ import {
 } from '@digitaldefiance-eecp/eecp-protocol';
 import { IParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
 import { Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
+import { IAuditLogger } from './audit-logger';
 
 /**
  * Participant session information
@@ -61,6 +62,11 @@ export interface IParticipantManager {
    * Get all participants in workspace
    */
   getWorkspaceParticipants(workspaceId: WorkspaceId): ParticipantSession[];
+
+  /**
+   * Get total participant count across all workspaces
+   */
+  getTotalParticipantCount(): number;
 }
 
 /**
@@ -68,11 +74,13 @@ export interface IParticipantManager {
  */
 export class ParticipantManager implements IParticipantManager {
   private sessions: Map<string, ParticipantSession> = new Map();
+  private auditLogger?: IAuditLogger;
 
-  constructor(private auth: IParticipantAuth) {
+  constructor(private auth: IParticipantAuth, auditLogger?: IAuditLogger) {
     if (!auth) {
       throw new Error('ParticipantAuth is required');
     }
+    this.auditLogger = auditLogger;
   }
 
   /**
@@ -160,6 +168,18 @@ export class ParticipantManager implements IParticipantManager {
       const key = this.getSessionKey(workspaceId, handshake.participantId);
       this.sessions.set(key, session);
 
+      // Log participant join
+      if (this.auditLogger) {
+        await this.auditLogger.logEvent(
+          workspaceId,
+          'participant_joined',
+          {
+            connectedAt: session.connectedAt,
+          },
+          handshake.participantId
+        );
+      }
+
       return session;
     } finally {
       // Clean up the temporary member
@@ -215,6 +235,20 @@ export class ParticipantManager implements IParticipantManager {
 
       // Remove session
       this.sessions.delete(key);
+
+      // Log participant leave
+      if (this.auditLogger) {
+        this.auditLogger.logEvent(
+          workspaceId,
+          'participant_left',
+          {
+            leftAt: Date.now(),
+          },
+          participantId
+        ).catch(() => {
+          // Ignore audit logging errors during cleanup
+        });
+      }
     }
   }
 
@@ -232,6 +266,15 @@ export class ParticipantManager implements IParticipantManager {
     return Array.from(this.sessions.values()).filter(
       (session) => session.workspaceId === workspaceId
     );
+  }
+
+  /**
+   * Get total participant count across all workspaces
+   * 
+   * @returns Total number of connected participants
+   */
+  getTotalParticipantCount(): number {
+    return this.sessions.size;
   }
 
   /**

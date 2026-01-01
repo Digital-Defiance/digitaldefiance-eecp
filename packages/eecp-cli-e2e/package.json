@@ -17,8 +17,7 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@digitaldefiance-eecp/eecp-cli:build",
-          "@digitaldefiance-eecp/eecp-cli:serve"
+          "@digitaldefiance-eecp/eecp-cli:build"
         ]
       }
     }

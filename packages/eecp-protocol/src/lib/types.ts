@@ -81,3 +81,34 @@ export interface EncryptedOperation {
   // Authentication
   signature: Buffer;
 }
+
+// Audit log types
+export type AuditEventType =
+  | 'workspace_created'
+  | 'workspace_extended'
+  | 'workspace_revoked'
+  | 'workspace_expired'
+  | 'participant_joined'
+  | 'participant_left'
+  | 'participant_revoked'
+  | 'operation_submitted'
+  | 'key_rotated'
+  | 'key_deleted';
+
+export interface AuditLogEntry {
+  id: string; // UUID for the log entry
+  workspaceId: WorkspaceId;
+  timestamp: number;
+  eventType: AuditEventType;
+  participantId?: ParticipantId; // Optional, not all events have a participant
+  metadata: Record<string, unknown>; // Event-specific metadata
+}
+
+export interface EncryptedAuditLogEntry {
+  id: string;
+  workspaceId: WorkspaceId;
+  timestamp: number;
+  encryptedContent: Buffer; // Encrypted AuditLogEntry
+  nonce: Buffer;
+  authTag: Buffer;
+}

@@ -19,8 +19,8 @@ describe('TemporalKeyDerivation Property Tests', () => {
         fc.uint8Array({ minLength: 32, maxLength: 32 }),
         // Generate random timestamp
         fc.integer({ min: 0, max: Date.now() }),
-        // Generate random rotation interval (5, 15, 30, or 60 minutes)
-        fc.constantFrom(5, 15, 30, 60),
+        // Generate random rotation interval (5-120 minutes)
+        fc.integer({ min: 5, max: 120 }),
         // Generate random grace period (30-120 seconds)
         fc.integer({ min: 30000, max: 120000 }),
         async (secretArray, startTime, rotationInterval, gracePeriod) => {

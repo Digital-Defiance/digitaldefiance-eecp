@@ -12,10 +12,14 @@ swcJestConfig.swcrc = false;
 module.exports = {
   displayName: '@digitaldefiance-eecp/eecp-client',
   preset: '../../jest.preset.js',
-  testEnvironment: 'node',
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   transform: {
     '^.+\\.[tj]s$': ['@swc/jest', swcJestConfig],
   },
   moduleFileExtensions: ['ts', 'js', 'html'],
   coverageDirectory: 'test-output/jest/coverage',
+  transformIgnorePatterns: [
+    'node_modules/(?!(uuid)/)',
+  ],
 };

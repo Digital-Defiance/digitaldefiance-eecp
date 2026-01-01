@@ -11,7 +11,22 @@ import {
   EncryptedOperation,
 } from '@digitaldefiance-eecp/eecp-protocol';
 import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
-import { randomUUID } from 'crypto';
+import { ECIESService, Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
+
+/**
+ * Helper function to generate a valid public key for testing
+ */
+function generateValidPublicKey(eciesService: ECIESService): Buffer {
+  const member = Member.newMember(
+    eciesService,
+    MemberType.User,
+    'Test User',
+    new EmailString('test@example.com')
+  );
+  const publicKey = Buffer.from(member.member.publicKey);
+  member.member.dispose();
+  return publicKey;
+}
 
 // Mock ParticipantAuth for testing
 class MockParticipantAuth implements IParticipantAuth {
@@ -33,9 +48,11 @@ describe('TemporalCleanupService', () => {
   let participantManager: IParticipantManager;
   let operationRouter: OperationRouter;
   let cleanupService: TemporalCleanupService;
+  let eciesService: ECIESService;
 
   beforeEach(() => {
-    workspaceManager = new WorkspaceManager();
+    eciesService = new ECIESService();
+    workspaceManager = new WorkspaceManager(eciesService);
     const mockAuth = new MockParticipantAuth();
     participantManager = new ParticipantManager(mockAuth);
     operationRouter = new OperationRouter(participantManager, workspaceManager);
@@ -65,7 +82,9 @@ describe('TemporalCleanupService', () => {
     });
 
     it('should create service successfully with valid dependencies', () => {
-      const service = new TemporalCleanupService(workspaceManager, operationRouter);
+      const testEciesService = new ECIESService();
+      const testWorkspaceManager = new WorkspaceManager(testEciesService);
+      const service = new TemporalCleanupService(testWorkspaceManager, operationRouter);
       expect(service).toBeDefined();
       expect(service.isServiceRunning()).toBe(false);
     });
@@ -122,8 +141,8 @@ describe('TemporalCleanupService', () => {
 
     it('should clear expired buffered operations', async () => {
       const now = Date.now();
-      const workspaceId = randomUUID();
-      const participantId = randomUUID();
+      const workspaceId = GuidV4.new();
+      const participantId = GuidV4.new();
 
       // Create a workspace
       const config: WorkspaceConfig = {
@@ -142,12 +161,12 @@ describe('TemporalCleanupService', () => {
 
       await workspaceManager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        generateValidPublicKey(eciesService)
       );
 
       // Buffer an old operation
       const oldOperation: EncryptedOperation = {
-        id: randomUUID(),
+        id: GuidV4.new(),
         workspaceId,
         participantId,
         timestamp: now - 5000, // 5 seconds ago
@@ -169,8 +188,8 @@ describe('TemporalCleanupService', () => {
 
     it('should preserve recent buffered operations', async () => {
       const now = Date.now();
-      const workspaceId = randomUUID();
-      const participantId = randomUUID();
+      const workspaceId = GuidV4.new();
+      const participantId = GuidV4.new();
 
       // Create a workspace
       const config: WorkspaceConfig = {
@@ -189,12 +208,12 @@ describe('TemporalCleanupService', () => {
 
       await workspaceManager.createWorkspace(
         config,
-        Buffer.from('creator-public-key')
+        generateValidPublicKey(eciesService)
       );
 
       // Buffer a recent operation (future timestamp)
       const recentOperation: EncryptedOperation = {
-        id: randomUUID(),
+        id: GuidV4.new(),
         workspaceId,
         participantId,
         timestamp: now + 5000, // 5 seconds in the future

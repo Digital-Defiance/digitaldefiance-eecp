@@ -7,14 +7,26 @@
     "tsBuildInfoFile": "dist/tsconfig.lib.tsbuildinfo",
     "emitDeclarationOnly": false,
     "forceConsistentCasingInFileNames": true,
-    "types": ["node"]
+    "lib": ["ES2020", "DOM"],
+    "types": []
   },
   "include": ["src/**/*.ts"],
-  "references": [],
+  "references": [
+    {
+      "path": "../eecp-crdt/tsconfig.lib.json"
+    },
+    {
+      "path": "../eecp-protocol/tsconfig.lib.json"
+    },
+    {
+      "path": "../eecp-crypto/tsconfig.lib.json"
+    }
+  ],
   "exclude": [
     "jest.config.ts",
     "jest.config.cts",
     "src/**/*.spec.ts",
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "src/test-setup.ts"
   ]
 }

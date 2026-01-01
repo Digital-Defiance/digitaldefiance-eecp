@@ -4,7 +4,7 @@
  */
 
 import * as fc from 'fast-check';
-import { Member, GuidV4, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
+import { Member, GuidV4, MemberType, EmailString, ECIESService } from '@digitaldefiance/ecies-lib';
 import { OperationRouter } from './operation-router.js';
 import { ParticipantManager } from './participant-manager.js';
 import { WorkspaceManager } from './workspace-manager.js';
@@ -28,15 +28,32 @@ async function createTestMember(): Promise<Member> {
   return result.member as Member;
 }
 
+/**
+ * Helper function to generate a valid public key for testing
+ */
+function generateValidPublicKey(eciesService: ECIESService): Buffer {
+  const member = Member.newMember(
+    eciesService,
+    MemberType.User,
+    'Creator',
+    new EmailString('creator@example.com')
+  );
+  const publicKey = Buffer.from(member.member.publicKey);
+  member.member.dispose();
+  return publicKey;
+}
+
 describe('OperationRouter Property Tests', () => {
   let router: OperationRouter;
   let participantManager: ParticipantManager;
   let workspaceManager: WorkspaceManager;
+  let testEciesService: ECIESService;
 
   beforeEach(() => {
     const auth = new ParticipantAuth();
     participantManager = new ParticipantManager(auth);
-    workspaceManager = new WorkspaceManager();
+    testEciesService = new ECIESService();
+    workspaceManager = new WorkspaceManager(testEciesService);
     router = new OperationRouter(participantManager, workspaceManager);
   });
 
@@ -54,13 +71,14 @@ describe('OperationRouter Property Tests', () => {
   test('Property 17: Server Zero-Knowledge Validation', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.constantFrom(5, 15, 30, 60), // Workspace duration
+        fc.integer({ min: 5, max: 120 }), // Workspace duration (5-120 minutes)
         fc.integer({ min: 1, max: 10 }), // Number of operations
         fc.array(fc.uint8Array({ minLength: 10, maxLength: 100 }), { minLength: 1, maxLength: 10 }), // Encrypted content
         async (durationMinutes, numOperations, encryptedContents) => {
           const auth = new ParticipantAuth();
           const participantManager = new ParticipantManager(auth);
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const router = new OperationRouter(participantManager, workspaceManager);
 
           const members: Member[] = [];
@@ -83,7 +101,7 @@ describe('OperationRouter Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('creator-key'));
+            await workspaceManager.createWorkspace(config, generateValidPublicKey(testEciesService));
 
             // Create mock participants with websockets
             const participants: Array<{ id: ParticipantId; websocket: any }> = [];
@@ -159,7 +177,7 @@ describe('OperationRouter Property Tests', () => {
       ),
       { numRuns: 100 }
     );
-  });
+  }, 30000); // 30 second timeout
 
   /**
    * Feature: eecp-full-system, Property 18: Operation Broadcast
@@ -171,13 +189,14 @@ describe('OperationRouter Property Tests', () => {
   test('Property 18: Operation Broadcast', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.constantFrom(5, 15, 30, 60), // Workspace duration
+        fc.integer({ min: 5, max: 120 }), // Workspace duration (5-120 minutes)
         fc.integer({ min: 2, max: 10 }), // Number of participants
         fc.integer({ min: 1, max: 5 }), // Number of operations
         async (durationMinutes, numParticipants, numOperations) => {
           const auth = new ParticipantAuth();
           const participantManager = new ParticipantManager(auth);
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const router = new OperationRouter(participantManager, workspaceManager);
 
           const members: Member[] = [];
@@ -200,7 +219,7 @@ describe('OperationRouter Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('creator-key'));
+            await workspaceManager.createWorkspace(config, generateValidPublicKey(testEciesService));
 
             // Create participants
             const participants: Array<{ id: ParticipantId; websocket: any }> = [];
@@ -267,7 +286,7 @@ describe('OperationRouter Property Tests', () => {
       ),
       { numRuns: 100 }
     );
-  });
+  }, 30000); // 30 second timeout
 
   /**
    * Feature: eecp-full-system, Property 24: Operation Buffering for Offline Participants
@@ -279,12 +298,13 @@ describe('OperationRouter Property Tests', () => {
   test('Property 24: Operation Buffering for Offline Participants', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.constantFrom(5, 15, 30, 60), // Workspace duration
+        fc.integer({ min: 5, max: 120 }), // Workspace duration (5-120 minutes)
         fc.integer({ min: 1, max: 10 }), // Number of operations to buffer
         async (durationMinutes, numOperations) => {
           const auth = new ParticipantAuth();
           const participantManager = new ParticipantManager(auth);
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const router = new OperationRouter(participantManager, workspaceManager);
 
           const members: Member[] = [];
@@ -307,7 +327,7 @@ describe('OperationRouter Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('creator-key'));
+            await workspaceManager.createWorkspace(config, generateValidPublicKey(testEciesService));
 
             // Create online participant (sender)
             const senderMember = await createTestMember();
@@ -393,7 +413,7 @@ describe('OperationRouter Property Tests', () => {
       ),
       { numRuns: 100 }
     );
-  });
+  }, 30000); // 30 second timeout
 
   /**
    * Feature: eecp-full-system, Property 25: Buffer Expiration
@@ -405,13 +425,14 @@ describe('OperationRouter Property Tests', () => {
   test('Property 25: Buffer Expiration', async () => {
     await fc.assert(
       fc.asyncProperty(
-        fc.constantFrom(5, 15, 30, 60), // Workspace duration
+        fc.integer({ min: 5, max: 120 }), // Workspace duration (5-120 minutes)
         fc.integer({ min: 2, max: 10 }), // Number of operations
         fc.integer({ min: 30000, max: 120000 }), // Grace period (30s to 2min)
         async (durationMinutes, numOperations, gracePeriod) => {
           const auth = new ParticipantAuth();
           const participantManager = new ParticipantManager(auth);
-          const workspaceManager = new WorkspaceManager();
+          const testEciesService = new ECIESService();
+          const workspaceManager = new WorkspaceManager(testEciesService);
           const router = new OperationRouter(participantManager, workspaceManager);
 
           const members: Member[] = [];
@@ -434,7 +455,7 @@ describe('OperationRouter Property Tests', () => {
               allowExtension: false,
             };
 
-            await workspaceManager.createWorkspace(config, Buffer.from('creator-key'));
+            await workspaceManager.createWorkspace(config, generateValidPublicKey(testEciesService));
 
             // Create offline participant
             const offlineMember = await createTestMember();

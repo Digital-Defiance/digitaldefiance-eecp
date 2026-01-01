@@ -5,6 +5,7 @@
 
 import * as Y from 'yjs';
 import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import { randomUUID } from 'crypto';
 
 /**
@@ -79,7 +80,7 @@ export class EncryptedTextCRDT implements IEncryptedTextCRDT {
     
     // Return operation for encryption and broadcast
     return {
-      id: randomUUID() as OperationId,
+      id: new GuidV4(randomUUID()) as OperationId,
       participantId,
       timestamp: Date.now(),
       type: 'insert',
@@ -110,7 +111,7 @@ export class EncryptedTextCRDT implements IEncryptedTextCRDT {
     
     // Return operation for encryption and broadcast
     return {
-      id: randomUUID() as OperationId,
+      id: new GuidV4(randomUUID()) as OperationId,
       participantId,
       timestamp: Date.now(),
       type: 'delete',

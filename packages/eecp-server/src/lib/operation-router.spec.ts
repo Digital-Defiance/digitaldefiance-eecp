@@ -11,6 +11,7 @@ import {
   EncryptedOperation,
   WorkspaceConfig,
 } from '@digitaldefiance-eecp/eecp-protocol';
+import { IMultiEncryptedMessage } from '@digitaldefiance/ecies-lib';
 
 describe('OperationRouter', () => {
   let router: IOperationRouter;
@@ -35,15 +36,24 @@ describe('OperationRouter', () => {
       allowExtension: false,
     };
 
+    // Create mock encrypted metadata
+    const mockEncryptedMetadata: IMultiEncryptedMessage = {
+      version: 1,
+      ephemeralPublicKey: Buffer.alloc(65),
+      encryptedMessage: Buffer.alloc(0),
+      recipients: [],
+    };
+
     // Create mock workspace
     mockWorkspace = {
       id: 'workspace-1',
       config: mockConfig,
-      encryptedMetadata: Buffer.alloc(0),
+      encryptedMetadata: mockEncryptedMetadata,
       createdAt: Date.now(),
       expiresAt: Date.now() + 30 * 60 * 1000,
       status: 'active',
       participantCount: 0,
+      participants: [],
     };
 
     // Create mock participant manager

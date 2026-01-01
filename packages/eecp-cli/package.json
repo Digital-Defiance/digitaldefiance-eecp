@@ -2,6 +2,10 @@
   "name": "@digitaldefiance-eecp/eecp-cli",
   "version": "0.0.1",
   "private": true,
+  "type": "module",
+  "bin": {
+    "eecp": "./dist/cli.js"
+  },
   "nx": {
     "targets": {
       "build": {
@@ -14,10 +18,13 @@
           "platform": "node",
           "outputPath": "packages/eecp-cli/dist",
           "format": [
-            "cjs"
+            "esm"
           ],
           "bundle": false,
           "main": "packages/eecp-cli/src/main.ts",
+          "additionalEntryPoints": [
+            "packages/eecp-cli/src/cli.ts"
+          ],
           "tsConfig": "packages/eecp-cli/tsconfig.app.json",
           "assets": [
             "packages/eecp-cli/src/assets"
@@ -103,6 +110,10 @@
     }
   },
   "dependencies": {
+    "@digitaldefiance-eecp/eecp-client": "*",
+    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "@digitaldefiance/ecies-lib": "^4.7.14",
+    "commander": "^14.0.2",
     "express": "^4.21.2"
   }
 }

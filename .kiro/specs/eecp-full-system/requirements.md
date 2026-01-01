@@ -26,7 +26,7 @@ The Ephemeral Encrypted Collaboration Protocol (EECP) is a zero-knowledge, self-
 #### Acceptance Criteria
 
 1. WHEN a user creates a workspace, THE System SHALL generate a unique workspace identifier and temporal key schedule
-2. WHEN creating a workspace, THE System SHALL accept expiration duration values of 5, 15, 30, or 60 minutes
+2. WHEN creating a workspace, THE System SHALL accept expiration duration values between 5 and 120 minutes (inclusive)
 3. WHEN a workspace is created, THE System SHALL generate a workspace keypair for participant authentication
 4. WHEN a workspace expires, THE System SHALL destroy all temporal keys and prevent new operations
 5. WHERE workspace extension is enabled, WHEN a creator extends a workspace before expiration, THE System SHALL update the expiration time and generate new temporal keys

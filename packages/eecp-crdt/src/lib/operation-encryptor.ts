@@ -253,7 +253,7 @@ export class OperationEncryptor implements IOperationEncryptor {
    */
   private createSignatureMessage(operation: EncryptedOperation): Buffer {
     return Buffer.concat([
-      Buffer.from(operation.id, 'utf8'),
+      Buffer.from(operation.id.toString(), 'utf8'),
       Buffer.from(operation.timestamp.toString(), 'utf8'),
       Buffer.from(operation.position.toString(), 'utf8'),
       Buffer.from(operation.operationType, 'utf8'),

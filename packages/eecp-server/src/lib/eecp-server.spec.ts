@@ -9,10 +9,26 @@ import { ParticipantManager } from './participant-manager';
 import { OperationRouter } from './operation-router';
 import { TemporalCleanupService } from './temporal-cleanup-service';
 import { RateLimiter } from './rate-limiter';
+import { MetricsService } from './metrics-service';
 import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
 import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
-import { GuidV4 } from '@digitaldefiance/ecies-lib';
+import { GuidV4, ECIESService, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 import axios from 'axios';
+
+/**
+ * Helper function to generate a valid public key for testing
+ */
+function generateValidPublicKey(eciesService: ECIESService): Buffer {
+  const member = Member.newMember(
+    eciesService,
+    MemberType.User,
+    'Test User',
+    new EmailString('test@example.com')
+  );
+  const publicKey = Buffer.from(member.member.publicKey);
+  member.member.dispose();
+  return publicKey;
+}
 
 describe('EECPServer Integration Tests', () => {
   let server: EECPServer;
@@ -22,17 +38,21 @@ describe('EECPServer Integration Tests', () => {
   let cleanupService: TemporalCleanupService;
   let participantAuth: ParticipantAuth;
   let rateLimiter: RateLimiter;
+  let metricsService: MetricsService;
+  let eciesService: ECIESService;
   const port = 3001; // Use different port for testing
   const baseUrl = `http://localhost:${port}`;
 
   beforeAll(async () => {
     // Initialize dependencies
     participantAuth = new ParticipantAuth();
-    workspaceManager = new WorkspaceManager();
+    eciesService = new ECIESService();
+    workspaceManager = new WorkspaceManager(eciesService);
     participantManager = new ParticipantManager(participantAuth);
     operationRouter = new OperationRouter(participantManager, workspaceManager);
     cleanupService = new TemporalCleanupService(workspaceManager, operationRouter);
     rateLimiter = new RateLimiter();
+    metricsService = new MetricsService();
 
     // Create server
     server = new EECPServer(
@@ -42,6 +62,7 @@ describe('EECPServer Integration Tests', () => {
       cleanupService,
       participantAuth,
       rateLimiter,
+      metricsService,
       { port, host: 'localhost' }
     );
 
@@ -74,7 +95,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: false,
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       const response = await axios.post(`${baseUrl}/workspaces`, {
         config,
@@ -94,10 +115,10 @@ describe('EECPServer Integration Tests', () => {
       const config: WorkspaceConfig = {
         id: GuidV4.new(),
         createdAt: now,
-        expiresAt: now + 20 * 60 * 1000, // 20 minutes (invalid)
+        expiresAt: now + 3 * 60 * 1000, // 3 minutes (too short)
         timeWindow: {
           startTime: now,
-          endTime: now + 20 * 60 * 1000,
+          endTime: now + 3 * 60 * 1000,
           rotationInterval: 15,
           gracePeriod: 60 * 1000,
         },
@@ -105,7 +126,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: false,
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       try {
         await axios.post(`${baseUrl}/workspaces`, {
@@ -149,7 +170,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: false,
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       // Create workspace first
       await axios.post(`${baseUrl}/workspaces`, {
@@ -165,7 +186,7 @@ describe('EECPServer Integration Tests', () => {
       expect(response.data.createdAt).toBe(config.createdAt);
       expect(response.data.expiresAt).toBe(config.expiresAt);
       expect(response.data.status).toBe('active');
-      expect(response.data.participantCount).toBe(0);
+      expect(response.data.participantCount).toBe(1); // Creator is counted as a participant
       expect(response.data.encryptedMetadata).toBeDefined();
     });
 
@@ -197,7 +218,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: true, // Allow extension
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       // Create workspace
       await axios.post(`${baseUrl}/workspaces`, {
@@ -243,7 +264,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: true,
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       // Create workspace
       await axios.post(`${baseUrl}/workspaces`, {
@@ -281,7 +302,7 @@ describe('EECPServer Integration Tests', () => {
         allowExtension: false,
       };
 
-      const creatorPublicKey = Buffer.from('test-public-key').toString('base64');
+      const creatorPublicKey = generateValidPublicKey(eciesService).toString('base64');
 
       // Create workspace
       await axios.post(`${baseUrl}/workspaces`, {
@@ -322,6 +343,71 @@ describe('EECPServer Integration Tests', () => {
       });
       expect(response.data.timestamp).toBeDefined();
       expect(typeof response.data.timestamp).toBe('number');
+    });
+
+    it('should include workspace and participant counts', async () => {
+      const response = await axios.get(`${baseUrl}/health`);
+
+      expect(response.status).toBe(200);
+      expect(response.data.workspaces).toBeDefined();
+      expect(response.data.participants).toBeDefined();
+      expect(typeof response.data.workspaces).toBe('number');
+      expect(typeof response.data.participants).toBe('number');
+    });
+  });
+
+  describe('GET /metrics - Prometheus metrics', () => {
+    it('should return metrics in Prometheus format', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.headers['content-type']).toContain('text/plain');
+      expect(typeof response.data).toBe('string');
+    });
+
+    it('should include workspace count metric', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toContain('eecp_workspace_count');
+      expect(response.data).toContain('# HELP eecp_workspace_count');
+      expect(response.data).toContain('# TYPE eecp_workspace_count gauge');
+    });
+
+    it('should include participant count metric', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toContain('eecp_participant_count');
+      expect(response.data).toContain('# HELP eecp_participant_count');
+      expect(response.data).toContain('# TYPE eecp_participant_count gauge');
+    });
+
+    it('should include operation metrics', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toContain('eecp_operations_total');
+      expect(response.data).toContain('# HELP eecp_operations_total');
+      expect(response.data).toContain('# TYPE eecp_operations_total counter');
+    });
+
+    it('should include operation latency histogram', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toContain('eecp_operation_latency_ms');
+      expect(response.data).toContain('# HELP eecp_operation_latency_ms');
+      expect(response.data).toContain('# TYPE eecp_operation_latency_ms histogram');
+      expect(response.data).toContain('eecp_operation_latency_ms_bucket');
+    });
+
+    it('should include default Node.js metrics', async () => {
+      const response = await axios.get(`${baseUrl}/metrics`);
+
+      expect(response.status).toBe(200);
+      expect(response.data).toContain('process_cpu');
+      expect(response.data).toContain('nodejs_');
     });
   });
 });

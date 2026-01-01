@@ -7,6 +7,7 @@ import { WorkspaceManager } from './lib/workspace-manager.js';
 import { ParticipantManager } from './lib/participant-manager.js';
 import { OperationRouter } from './lib/operation-router.js';
 import { TemporalCleanupService } from './lib/temporal-cleanup-service.js';
+import { RateLimiter } from './lib/rate-limiter.js';
 import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
 
 const host = process.env.HOST ?? 'localhost';
@@ -18,6 +19,7 @@ const workspaceManager = new WorkspaceManager();
 const participantManager = new ParticipantManager(participantAuth);
 const operationRouter = new OperationRouter(participantManager, workspaceManager);
 const cleanupService = new TemporalCleanupService(workspaceManager, operationRouter);
+const rateLimiter = new RateLimiter();
 
 // Create and start server
 const server = new EECPServer(
@@ -26,6 +28,7 @@ const server = new EECPServer(
   operationRouter,
   cleanupService,
   participantAuth,
+  rateLimiter,
   { port, host }
 );
 

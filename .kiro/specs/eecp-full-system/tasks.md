@@ -289,27 +289,27 @@ This implementation plan breaks down the EECP system into discrete, incremental 
     - **Property 39: Operation Acknowledgment**
     - **Validates: Requirements 11.3**
 
-- [ ] 18. Implement rate limiting
-  - [ ] 18.1 Add rate limiting middleware to server
+- [x] 18. Implement rate limiting
+  - [x] 18.1 Add rate limiting middleware to server
     - Implement operation rate limiting (100 ops/sec per participant)
     - Implement workspace creation rate limiting (10/hour per IP)
     - Implement participant limit enforcement (50 per workspace)
     - Return backpressure signals on rate limit exceeded
     - _Requirements: 17.1, 17.2, 17.3, 17.4_
   
-  - [ ] 18.2 Write property test for rate limiting backpressure
+  - [x] 18.2 Write property test for rate limiting backpressure
     - **Property 47: Rate Limiting Backpressure**
     - **Validates: Requirements 15.5, 17.1, 17.2**
   
-  - [ ] 18.3 Write property test for workspace creation rate limiting
+  - [x] 18.3 Write property test for workspace creation rate limiting
     - **Property 49: Workspace Creation Rate Limiting**
     - **Validates: Requirements 17.3**
   
-  - [ ] 18.4 Write property test for participant limit enforcement
+  - [x] 18.4 Write property test for participant limit enforcement
     - **Property 50: Participant Limit Enforcement**
     - **Validates: Requirements 17.4**
 
-- [ ] 19. Checkpoint - Ensure server tests pass
+- [-] 19. Checkpoint - Ensure server tests pass
   - Ensure all tests pass, ask the user if questions arise.
 
 - [ ] 20. Implement client key manager
@@ -574,6 +574,49 @@ This implementation plan breaks down the EECP system into discrete, incremental 
 
 - [ ] 35. Final checkpoint - Ensure all tests pass
   - Ensure all tests pass, ask the user if questions arise.
+
+- [ ] 36. Write comprehensive README
+
+- [ ] 37. Update showcase
+  - /showcase is copied from another project, update it, keeping Digital Defiance footer section.
+
+- [ ] 38. Implement browser-compatible server (stackblitz?) for showcase
+  - [ ] 38.1 Create BrowserEECPServer class
+    - Implement in-memory workspace storage (no Node.js dependencies)
+    - Implement browser-compatible crypto using Web Crypto API
+    - Create event-based transport layer (replaces WebSocket)
+    - Expose same API as EECPServer but for browser environment
+    - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 11.1, 11.2, 11.3_
+  
+  - [ ] 38.2 Create in-memory message bus
+    - Implement EventEmitter-based communication between client and server
+    - Replace WebSocket messages with direct method calls
+    - Maintain message envelope format for consistency
+    - _Requirements: 11.2, 11.3_
+  
+  - [ ] 38.3 Update showcase to use browser server
+    - Create demo component showing server + client side-by-side
+    - Visualize message flow between client and server
+    - Display CRDT operations in real-time
+    - Show encryption/decryption process
+    - Add controls to simulate multiple participants
+    - _Requirements: 14.1, 14.2, 14.3_
+  
+  - [ ] 38.4 Add visualization components
+    - Create MessageFlow component showing operation routing
+    - Create CRDTVisualizer showing document state
+    - Create ParticipantPanel showing multiple simulated users
+    - Create EncryptionIndicator showing crypto operations
+    - _Requirements: 14.2, 14.3_
+  
+  - [ ] 38.5 Write tests for browser server
+    - Test in-memory workspace management
+    - Test event-based message routing
+    - Test browser crypto compatibility
+    - _Requirements: 1.1, 11.2_
+
+- [ ] 39. Add jsdoc
+  - Go through and add extensive jsdoc to all source
 
 ## Notes
 

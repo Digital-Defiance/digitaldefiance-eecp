@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {
   WorkspaceConfig,
   WorkspaceId,
+  EncryptedOperation,
 } from '@digitaldefiance-eecp/eecp-protocol';
 import {
   MessageEnvelope,
@@ -33,6 +34,7 @@ import { IParticipantManager, ParticipantSession } from './participant-manager.j
 import { IOperationRouter } from './operation-router.js';
 import { ITemporalCleanupService } from './temporal-cleanup-service.js';
 import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+import { IRateLimiter } from './rate-limiter.js';
 
 /**
  * EECP Server configuration
@@ -61,6 +63,7 @@ export class EECPServer {
     private operationRouter: IOperationRouter,
     private cleanupService: ITemporalCleanupService,
     private participantAuth: IParticipantAuth,
+    private rateLimiter: IRateLimiter,
     config?: Partial<EECPServerConfig>
   ) {
     this.config = {
@@ -106,6 +109,20 @@ export class EECPServer {
     // POST /workspaces - Create workspace
     this.app.post('/workspaces', async (req: Request, res: Response) => {
       try {
+        // Get client IP address
+        const ipAddress = req.ip || req.socket.remoteAddress || 'unknown';
+
+        // Check workspace creation rate limit
+        const rateLimitResult = this.rateLimiter.checkWorkspaceCreationRate(ipAddress);
+        if (!rateLimitResult.allowed) {
+          res.status(429).json({
+            error: 'RATE_LIMIT_EXCEEDED',
+            message: rateLimitResult.reason,
+            retryAfter: rateLimitResult.retryAfter,
+          });
+          return;
+        }
+
         const { config, creatorPublicKey } = req.body;
 
         if (!config || !creatorPublicKey) {
@@ -123,6 +140,23 @@ export class EECPServer {
           return;
         }
 
+        // Reconstruct GuidV4 from serialized format
+        const reconstructGuidV4 = (value: any): GuidV4 => {
+          if (typeof value === 'string') {
+            return new GuidV4(value);
+          } else if (value && value._value && value._value.data) {
+            return GuidV4.fromBuffer(Buffer.from(value._value.data));
+          } else {
+            throw new Error('Invalid GuidV4 format');
+          }
+        };
+
+        // Reconstruct the workspace config with proper GuidV4
+        const workspaceConfig: WorkspaceConfig = {
+          ...config,
+          id: reconstructGuidV4(config.id),
+        };
+
         // Convert public key from base64 if needed
         const publicKeyBuffer = Buffer.isBuffer(creatorPublicKey)
           ? creatorPublicKey
@@ -130,9 +164,12 @@ export class EECPServer {
 
         // Create workspace
         const workspace = await this.workspaceManager.createWorkspace(
-          config as WorkspaceConfig,
+          workspaceConfig,
           publicKeyBuffer
         );
+
+        // Record workspace creation for rate limiting
+        this.rateLimiter.recordWorkspaceCreation(ipAddress);
 
         res.status(201).json({
           id: workspace.id,
@@ -151,7 +188,15 @@ export class EECPServer {
     // GET /workspaces/:id - Get workspace info
     this.app.get('/workspaces/:id', async (req: Request, res: Response) => {
       try {
-        const workspaceId = new GuidV4(req.params.id);
+        let workspaceId: GuidV4;
+        try {
+          workspaceId = new GuidV4(req.params.id);
+        } catch (error) {
+          res.status(404).json({
+            error: 'Workspace not found',
+          });
+          return;
+        }
 
         const workspace = await this.workspaceManager.getWorkspace(workspaceId);
 
@@ -181,7 +226,16 @@ export class EECPServer {
     // POST /workspaces/:id/extend - Extend workspace
     this.app.post('/workspaces/:id/extend', async (req: Request, res: Response) => {
       try {
-        const workspaceId = new GuidV4(req.params.id);
+        let workspaceId: GuidV4;
+        try {
+          workspaceId = new GuidV4(req.params.id);
+        } catch (error) {
+          res.status(404).json({
+            error: 'Workspace not found',
+          });
+          return;
+        }
+        
         const { additionalMinutes } = req.body;
 
         if (!additionalMinutes || typeof additionalMinutes !== 'number') {
@@ -219,7 +273,15 @@ export class EECPServer {
     // DELETE /workspaces/:id - Revoke workspace
     this.app.delete('/workspaces/:id', async (req: Request, res: Response) => {
       try {
-        const workspaceId = new GuidV4(req.params.id);
+        let workspaceId: GuidV4;
+        try {
+          workspaceId = new GuidV4(req.params.id);
+        } catch (error) {
+          res.status(404).json({
+            error: 'Workspace not found',
+          });
+          return;
+        }
 
         await this.workspaceManager.revokeWorkspace(workspaceId);
 
@@ -431,6 +493,18 @@ export class EECPServer {
         return;
       }
 
+      // Check participant limit
+      const currentParticipantCount = this.participantManager.getWorkspaceParticipants(workspaceId).length;
+      const participantLimitResult = this.rateLimiter.checkParticipantLimit(
+        workspaceId,
+        currentParticipantCount
+      );
+      if (!participantLimitResult.allowed) {
+        this.sendError(ws, 'RATE_LIMIT_EXCEEDED', participantLimitResult.reason || 'Participant limit exceeded');
+        ws.close();
+        return;
+      }
+
       // Authenticate participant
       // Create a modified handshake with reconstructed IDs and Buffers
       const handshakeWithReconstructed: HandshakeMessage = {
@@ -485,18 +559,72 @@ export class EECPServer {
     session: ParticipantSession
   ): Promise<void> {
     try {
+      // Check operation rate limit
+      const rateLimitResult = this.rateLimiter.checkOperationRate(
+        session.workspaceId,
+        session.participantId
+      );
+      if (!rateLimitResult.allowed) {
+        this.sendError(
+          ws,
+          'RATE_LIMIT_EXCEEDED',
+          rateLimitResult.reason || 'Rate limit exceeded',
+          { retryAfter: rateLimitResult.retryAfter }
+        );
+        return;
+      }
+
       const message = envelope.payload as OperationMessage;
+
+      // Helper to reconstruct Buffer from serialized format
+      const reconstructBuffer = (value: any): Buffer => {
+        if (Buffer.isBuffer(value)) {
+          return value;
+        } else if (value && value.type === 'Buffer' && Array.isArray(value.data)) {
+          return Buffer.from(value.data);
+        } else if (value instanceof Uint8Array) {
+          return Buffer.from(value);
+        } else {
+          throw new Error('Invalid Buffer format');
+        }
+      };
+
+      // Reconstruct GuidV4 from serialized format
+      const reconstructGuidV4 = (value: any): GuidV4 => {
+        if (typeof value === 'string') {
+          return new GuidV4(value);
+        } else if (value && value._value && value._value.data) {
+          return GuidV4.fromBuffer(Buffer.from(value._value.data));
+        } else {
+          throw new Error('Invalid GuidV4 format');
+        }
+      };
+
+      // Reconstruct the operation with proper types
+      const reconstructedOperation: EncryptedOperation = {
+        id: reconstructGuidV4(message.operation.id),
+        workspaceId: reconstructGuidV4(message.operation.workspaceId),
+        participantId: reconstructGuidV4(message.operation.participantId),
+        timestamp: message.operation.timestamp,
+        position: message.operation.position,
+        operationType: message.operation.operationType,
+        encryptedContent: reconstructBuffer(message.operation.encryptedContent),
+        signature: reconstructBuffer(message.operation.signature),
+      };
+
+      // Record operation for rate limiting
+      this.rateLimiter.recordOperation(session.workspaceId, session.participantId);
 
       // Route operation to all participants
       await this.operationRouter.routeOperation(
         session.workspaceId,
-        message.operation,
+        reconstructedOperation,
         session.participantId
       );
 
-      // Send acknowledgment
+      // Send acknowledgment with the original operation ID
       const ack: OperationAckMessage = {
-        operationId: message.operation.id,
+        operationId: reconstructedOperation.id,
         serverTimestamp: Date.now(),
       };
 
@@ -621,6 +749,9 @@ export class EECPServer {
   async stop(): Promise<void> {
     // Stop cleanup service
     this.cleanupService.stop();
+
+    // Stop rate limiter
+    this.rateLimiter.stop();
 
     // Close all WebSocket connections
     this.wss.clients.forEach((client) => {

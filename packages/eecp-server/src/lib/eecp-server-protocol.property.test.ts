@@ -9,6 +9,7 @@ import { WorkspaceManager } from './workspace-manager';
 import { ParticipantManager } from './participant-manager';
 import { OperationRouter } from './operation-router';
 import { TemporalCleanupService } from './temporal-cleanup-service';
+import { RateLimiter } from './rate-limiter';
 import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
 import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
 import {
@@ -29,6 +30,7 @@ describe('EECP Server Protocol Property Tests', () => {
   let operationRouter: OperationRouter;
   let cleanupService: TemporalCleanupService;
   let participantAuth: ParticipantAuth;
+  let rateLimiter: RateLimiter;
   const port = 3002; // Use different port for property tests
   const wsUrl = `ws://localhost:${port}`;
 
@@ -52,6 +54,7 @@ describe('EECP Server Protocol Property Tests', () => {
     participantManager = new ParticipantManager(participantAuth);
     operationRouter = new OperationRouter(participantManager, workspaceManager);
     cleanupService = new TemporalCleanupService(workspaceManager, operationRouter);
+    rateLimiter = new RateLimiter();
 
     // Create server
     server = new EECPServer(
@@ -60,6 +63,7 @@ describe('EECP Server Protocol Property Tests', () => {
       operationRouter,
       cleanupService,
       participantAuth,
+      rateLimiter,
       { port, host: 'localhost', protocolVersion: '1.0.0' }
     );
 
@@ -396,9 +400,22 @@ describe('EECP Server Protocol Property Tests', () => {
                 } else if (envelope.type === 'operation_ack' && authenticated) {
                   const ack = envelope.payload as OperationAckMessage;
 
-                  // Compare GuidV4 IDs as strings
-                  const operationIdStr = typeof operationId === 'string' ? operationId : operationId.toString();
-                  const ackIdStr = typeof ack.operationId === 'string' ? ack.operationId : ack.operationId.toString();
+                  // Reconstruct GuidV4 from serialized acknowledgment
+                  const reconstructGuidV4 = (value: any): GuidV4 => {
+                    if (typeof value === 'string') {
+                      return new GuidV4(value);
+                    } else if (value && value._value && value._value.data) {
+                      return GuidV4.fromBuffer(Buffer.from(value._value.data));
+                    } else {
+                      throw new Error('Invalid GuidV4 format');
+                    }
+                  };
+
+                  const ackOperationId = reconstructGuidV4(ack.operationId);
+                  
+                  // Compare GuidV4 IDs as hex strings
+                  const operationIdStr = operationId.asFullHexGuid;
+                  const ackIdStr = ackOperationId.asFullHexGuid;
 
                   resolve({
                     received: true,

@@ -22,5 +22,13 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"]
+  "include": ["src"],
+  "references": [
+    {
+      "path": "../packages/eecp-protocol/tsconfig.lib.json"
+    },
+    {
+      "path": "../packages/eecp-browser"
+    }
+  ]
 }

@@ -17,7 +17,7 @@ import {
   CRDTOperation,
 } from '@digitaldefiance/eecp-protocol';
 import { GuidV4, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
-import { BrowserTransport } from './browser-server.js';
+import { BrowserTransport } from './browser-server';
 import {
   EncryptedTextCRDT,
   OperationEncryptor,

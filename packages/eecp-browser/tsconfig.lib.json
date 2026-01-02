@@ -1,0 +1,23 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "**/*.spec.ts", "**/*.test.ts"],
+  "references": [
+    {
+      "path": "../eecp-protocol/tsconfig.lib.json"
+    },
+    {
+      "path": "../eecp-crypto/tsconfig.lib.json"
+    },
+    {
+      "path": "../eecp-crdt/tsconfig.lib.json"
+    },
+    {
+      "path": "../eecp-client/tsconfig.lib.json"
+    }
+  ]
+}

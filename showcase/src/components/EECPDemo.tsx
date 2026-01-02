@@ -6,8 +6,8 @@
  */
 
 import { useState, useEffect, useRef } from 'react';
-import { BrowserEECPServer, BrowserTransport } from '../lib/browser-server';
-import { MessageBus, createMessageBus } from '../lib/message-bus';
+import { BrowserEECPServer, BrowserTransport } from '@digitaldefiance/eecp-browser';
+import { MessageBus, createMessageBus } from '@digitaldefiance/eecp-browser';
 import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { ECIESService } from '@digitaldefiance/ecies-lib';
 import MessageFlow from './MessageFlow';

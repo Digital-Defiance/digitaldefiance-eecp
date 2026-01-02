@@ -25,7 +25,7 @@ const About = () => {
         transition={{ duration: 0.6 }}
       >
         <h2 className="section-title">
-          Built with <span className="gradient-text">❤️</span> by Digital
+          Built with <a href="https://digital-defiance.github.io/express-suite">Express Suite ECIES</a> and <span className="gradient-text">❤️</span> by Digital
           Defiance
         </h2>
         <p className="about-subtitle">

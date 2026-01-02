@@ -1,8 +1,14 @@
 # Ephemeral Encrypted Collaboration Protocol (EECP)
 
+<div align="center">
+
+## 🚀 [**Try the Live Demo**](https://digital-defiance.github.io/digitaldefiance-eecp) 🚀
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-blue.svg)](https://www.typescriptlang.org/)
 [![Nx](https://img.shields.io/badge/Nx-22.1-blue.svg)](https://nx.dev)
+
+</div>
 
 A zero-knowledge, self-destructing collaborative workspace system that enables real-time document collaboration with cryptographic guarantees of content unreadability after expiration.
 

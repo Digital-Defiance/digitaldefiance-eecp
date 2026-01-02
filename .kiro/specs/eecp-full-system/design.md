@@ -15,7 +15,7 @@ The system consists of multiple TypeScript packages in an Nx monorepo:
 - `eecp-server`: Express + WebSocket server for operation routing
 - `eecp-client`: Browser client library with React hooks
 - `eecp-cli`: Command-line interface for testing and automation
-- `eecp-demo`: Reference web application
+- `showcase`: Reference web application
 
 ## Architecture
 
@@ -2156,48 +2156,73 @@ program.parse();
 ```
 
 
-### 7. Demo Package (`eecp-demo`)
+### 7. Browser Package (`eecp-browser`)
 
-Reference web application demonstrating EECP capabilities.
+Browser-compatible server and client components for running EECP entirely in the browser.
 
-#### Demo Application Structure
+#### Browser Server Structure
 
 ```typescript
-// App.tsx - Main application component
-function App() {
-  const [workspaceId, setWorkspaceId] = useState<string | null>(null);
-  const [view, setView] = useState<'home' | 'create' | 'join' | 'workspace'>('home');
+// BrowserEECPServer.ts - In-browser server
+export class BrowserEECPServer {
+  private workspaces: Map<string, Workspace> = new Map();
+  private transports: Set<BrowserTransport> = new Set();
   
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage onNavigate={setView} />} />
-        <Route path="/create" element={<CreateWorkspace />} />
-        <Route path="/join/:id" element={<JoinWorkspace />} />
-        <Route path="/workspace/:id" element={<WorkspaceView />} />
-      </Routes>
-    </Router>
-  );
+  start(): void {
+    // Server runs in-memory, no network required
+  }
+  
+  createTransport(): BrowserTransport {
+    const transport = new BrowserTransport(this.messageBus);
+    this.transports.add(transport);
+    return transport;
+  }
+  
+  async createWorkspace(config: WorkspaceConfig): Promise<Workspace> {
+    const workspace = new Workspace(config);
+    this.workspaces.set(config.id, workspace);
+    return workspace;
+  }
 }
 
-// CreateWorkspace.tsx - Workspace creation
-function CreateWorkspace() {
-  const [duration, setDuration] = useState(30);
-  const navigate = useNavigate();
+// BrowserTransport.ts - In-memory transport
+export class BrowserTransport {
+  private messageBus: MessageBus;
   
-  const handleCreate = async () => {
-    const client = new EECPClient();
-    await client.connect('ws://localhost:3000');
-    
+  send(message: string): void {
+    this.messageBus.publish(message);
+  }
+  
+  onMessage(handler: (message: string) => void): void {
+    this.messageBus.subscribe(handler);
+  }
+}
+```
+
+#### Showcase Integration
+
+The `showcase` directory contains the marketing site and interactive demo:
+
+```typescript
+// EECPDemo.tsx - Interactive browser demo
+function EECPDemo() {
+  const [server] = useState(() => new BrowserEECPServer());
+  const [workspace, setWorkspace] = useState<any>(null);
+  
+  useEffect(() => {
+    server.start();
+  }, [server]);
+  
+  const handleCreateWorkspace = async () => {
     const config: WorkspaceConfig = {
-      id: generateWorkspaceId(),
+      id: crypto.randomUUID(),
       createdAt: Date.now(),
-      expiresAt: Date.now() + duration * 60 * 1000,
+      expiresAt: Date.now() + 2 * 60 * 1000, // 2 minutes
       timeWindow: {
         startTime: Date.now(),
-        endTime: Date.now() + duration * 60 * 1000,
+        endTime: Date.now() + 2 * 60 * 1000,
         rotationInterval: 15,
-        gracePeriod: 60 * 1000
+        gracePeriod: 5 * 1000
       },
       maxParticipants: 50,
       allowExtension: false

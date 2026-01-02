@@ -65,7 +65,7 @@ This is an Nx monorepo containing the following packages:
 - **`eecp-server`** - Express + WebSocket server for operation routing
 - **`eecp-client`** - Browser client library with React hooks
 - **`eecp-cli`** - Command-line interface for testing and automation
-- **`eecp-demo`** - Reference web application
+- **`eecp-browser`** - Browser-compatible server and client components
 
 ## 🚀 Quick Start
 
@@ -97,14 +97,20 @@ npx nx serve eecp-server
 # Server will start on http://localhost:3000
 ```
 
-### Running the Demo Application
+### Running the Showcase
+
+The showcase is a marketing and demo site deployed to GitHub Pages:
 
 ```bash
-# Start the demo web application
-npx nx serve eecp-demo
+# Start the showcase locally
+cd showcase
+yarn install
+yarn dev
 
-# Demo will be available at http://localhost:4200
+# Showcase will be available at http://localhost:5173
 ```
+
+The showcase includes an interactive browser-based demo of the EECP protocol.
 
 ### Using the CLI
 
@@ -332,8 +338,8 @@ digitaldefiance-eecp/
 │   ├── eecp-server/        # WebSocket server
 │   ├── eecp-client/        # Browser client
 │   ├── eecp-cli/           # Command-line interface
-|   ├── eecp-browser/       # Browser demo server/client components
-│   └── eecp-demo/          # Demo application
+│   └── eecp-browser/       # Browser-compatible components
+├── showcase/               # Marketing site and interactive demo
 ├── .kiro/
 │   └── specs/
 │       └── eecp-full-system/  # Requirements and design docs
@@ -352,7 +358,7 @@ npx nx run-many -t build
 npx nx build eecp-server
 
 # Build with dependencies
-npx nx build eecp-demo --with-deps
+npx nx build eecp-client --with-deps
 ```
 
 ### Linting
@@ -374,8 +380,8 @@ npx nx lint eecp-client --fix
 # Generate a new library
 npx nx g @nx/js:lib packages/my-lib --publishable --importPath=@digitaldefiance/my-lib
 
-# Generate a new component
-npx nx g @nx/react:component MyComponent --project=eecp-demo
+# Generate a new component in the showcase
+npx nx g @nx/react:component MyComponent --project=showcase
 ```
 
 ## 📚 API Documentation

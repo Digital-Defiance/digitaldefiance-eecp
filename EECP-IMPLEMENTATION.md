@@ -209,7 +209,7 @@ What do you think? The ephemeral collaboration space is genuinely unsolved, and 
    
 
   ```plaintext
-  eecp-demo
+  eecp-browser
   ```
 
 -  Configure TypeScript strict, Jest, ESLint
@@ -476,12 +476,12 @@ What do you think? The ephemeral collaboration space is genuinely unsolved, and 
 
 -  Utilities: key gen, workspace info, export/import
 
-### 8. Demo (eecp-demo)
+### 7. Browser Package (eecp-browser)
 
--  React 19 + Material-UI/Tailwind
--  Rich text editor (Quill/Slate/ProseMirror)
--  Features: participant list, countdown, share, export
--  In-app tutorial
+-  Browser-compatible server and client
+-  In-memory message bus
+-  Self-contained demo capabilities
+-  Full protocol support in browser
 
 ## Phase 3: Polish (Weeks 7-8)
 

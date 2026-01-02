@@ -315,6 +315,37 @@ export default function EECPDemo() {
       <div className="demo-header">
         <h2>EECP Protocol Demo</h2>
         <p>Interactive demonstration of the Ephemeral Encrypted Collaboration Protocol</p>
+        <div className="demo-explainer">
+          <div className="explainer-section">
+            <h4>🔐 Why Temporal Encryption?</h4>
+            <p>
+              In real-world scenarios like <strong>legal reviews</strong>, <strong>medical consultations</strong>, 
+              or <strong>whistleblower collaboration</strong>, data must be <em>provably destroyed</em> after a set time.
+              EECP uses temporal keys that are cryptographically destroyed on schedule, making content 
+              <strong>mathematically unreadable</strong> after expiration—not just deleted, but unrecoverable.
+            </p>
+            <p style={{ 
+              marginTop: '0.75rem', 
+              padding: '0.75rem', 
+              background: 'rgba(102, 126, 234, 0.15)', 
+              borderRadius: '6px',
+              fontSize: '0.9rem',
+              borderLeft: '3px solid #667eea'
+            }}>
+              <strong>📝 Demo Note:</strong> This demo uses a <strong>2-minute expiration</strong> so you can see 
+              the key destruction in action. In production, you'd choose your own duration (5-120 minutes) 
+              based on your use case—5 minutes for quick credential sharing, 60 minutes for legal reviews, etc.
+            </p>
+          </div>
+          <div className="explainer-section">
+            <h4>🔄 Bidirectional Zero-Knowledge Flow</h4>
+            <p>
+              <span style={{ color: '#3b82f6' }}>↑ Client→Server:</span> Participants encrypt operations and send to server<br/>
+              <span style={{ color: '#10b981' }}>↓ Server→Clients:</span> Server broadcasts encrypted operations to all participants<br/>
+              <strong>The server never sees plaintext</strong>—it only routes encrypted data between participants.
+            </p>
+          </div>
+        </div>
       </div>
 
       <div className="demo-grid">
@@ -351,14 +382,38 @@ export default function EECPDemo() {
             {workspace && (
               <div className="workspace-info">
                 <p><strong>Workspace ID:</strong> {workspace.id.asFullHexGuid.substring(0, 8)}...</p>
+                <p><strong>Demo Duration:</strong> 2 minutes (configurable in production)</p>
                 <p><strong>Expires in:</strong> {timeRemaining !== null ? (
                   <span className={timeRemaining < 30000 ? 'expiring-soon' : ''}>
                     {Math.floor(timeRemaining / 60000)}:{String(Math.floor((timeRemaining % 60000) / 1000)).padStart(2, '0')}
                   </span>
                 ) : '...'}</p>
                 <p><strong>Key Rotation:</strong> Every 15 seconds</p>
+                {timeRemaining !== null && timeRemaining > 0 && (
+                  <div style={{ 
+                    marginTop: '0.75rem', 
+                    padding: '0.75rem', 
+                    background: 'rgba(102, 126, 234, 0.1)', 
+                    borderRadius: '6px',
+                    fontSize: '0.85rem'
+                  }}>
+                    <strong>💡 What happens at expiration:</strong><br/>
+                    • Temporal keys are cryptographically destroyed<br/>
+                    • All messages become mathematically unreadable<br/>
+                    • No new operations can be sent<br/>
+                    • Content is provably unrecoverable<br/>
+                    <br/>
+                    <em style={{ color: '#667eea' }}>
+                      In production, you choose the duration: 5 min for quick shares, 
+                      30 min for meetings, 60 min for legal reviews.
+                    </em>
+                  </div>
+                )}
                 {timeRemaining !== null && timeRemaining === 0 && (
-                  <p className="expired-warning">⚠️ Workspace has expired! Keys are no longer valid.</p>
+                  <p className="expired-warning">
+                    ⚠️ Workspace has expired!<br/>
+                    Keys destroyed • Data unreadable • Create new workspace to continue
+                  </p>
                 )}
               </div>
             )}

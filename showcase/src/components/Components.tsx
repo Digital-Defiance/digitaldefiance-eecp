@@ -142,20 +142,21 @@ const components: Component[] = [
     ],
   },
   {
-    title: 'eecp-demo',
-    icon: '🎨',
+    title: 'eecp-browser',
+    icon: '🌐',
     description:
-      'Reference web application demonstrating EECP capabilities. Features rich text editing with Quill, participant sidebar, countdown timer, shareable links, and document export functionality.',
-    tech: ['React 19', 'Vite', 'Quill', 'Material-UI'],
+      'Browser-compatible server and client components for running EECP entirely in the browser. Enables self-contained demos and testing without requiring a separate server process.',
+    tech: ['TypeScript', 'Browser APIs', 'Yjs', 'IndexedDB'],
     github:
-      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-demo',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-browser',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-browser',
     category: 'Client',
     highlights: [
-      'Rich text editor with formatting controls',
-      'Participant list with online status indicators',
-      'Countdown timer showing workspace expiration',
-      'Shareable link generation with embedded credentials',
-      'Document export to plaintext',
+      'Browser-based EECP server implementation',
+      'In-memory message bus for client-server communication',
+      'No external server required for demos',
+      'Full protocol support in browser environment',
+      'Used by the showcase interactive demo',
     ],
   },
 ];
@@ -223,7 +224,7 @@ const Components = () => {
                 to enable secure collaboration: protocol definitions (eecp-protocol),
                 cryptographic primitives (eecp-crypto), encrypted CRDTs (eecp-crdt),
                 zero-knowledge server (eecp-server), browser client (eecp-client),
-                CLI tools (eecp-cli), and demo application (eecp-demo).
+                CLI tools (eecp-cli), and browser components (eecp-browser).
               </p>
               <p>
                 Built with TypeScript and extensively tested with{' '}

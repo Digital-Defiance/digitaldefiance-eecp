@@ -26,9 +26,6 @@
     },
     {
       "path": "./packages/eecp-cli"
-    },
-    {
-      "path": "./packages/eecp-demo"
     }
   ]
 }

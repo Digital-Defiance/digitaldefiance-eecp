@@ -2,6 +2,8 @@
   padding: 2rem;
   max-width: 1400px;
   margin: 0 auto;
+  background: #f8f9fa;
+  border-radius: 16px;
 }
 
 .demo-header {
@@ -16,8 +18,43 @@
 }
 
 .demo-header p {
-  color: #666;
+  color: #4b5563;
   font-size: 1.1rem;
+}
+
+.demo-explainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  text-align: left;
+}
+
+.explainer-section {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.explainer-section h4 {
+  margin: 0 0 0.75rem 0;
+  color: #667eea;
+  font-size: 1.1rem;
+}
+
+.explainer-section p {
+  margin: 0;
+  color: #374151;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .demo-explainer {
+    grid-template-columns: 1fr;
+  }
 }
 
 .demo-grid {
@@ -79,14 +116,15 @@
 .stat {
   text-align: center;
   padding: 1rem;
-  background: #f9fafb;
+  background: white;
   border-radius: 8px;
+  border: 1px solid #e5e7eb;
 }
 
 .stat-label {
   display: block;
   font-size: 0.875rem;
-  color: #666;
+  color: #6b7280;
   margin-bottom: 0.5rem;
 }
 
@@ -100,7 +138,7 @@
 .workspace-info {
   margin-top: 1rem;
   padding: 1rem;
-  background: #f0fdf4;
+  background: #ecfdf5;
   border-radius: 8px;
   border-left: 4px solid #10b981;
   color: #1a1a1a;
@@ -109,7 +147,7 @@
 .workspace-info p {
   margin: 0.5rem 0;
   font-size: 0.875rem;
-  color: #374151;
+  color: #065f46;
 }
 
 .expiring-soon {
@@ -138,10 +176,11 @@
 }
 
 .participant-card {
-  background: #f9fafb;
+  background: white;
   border-radius: 8px;
   padding: 1rem;
   margin-bottom: 1rem;
+  border: 1px solid #e5e7eb;
 }
 
 .participant-header {
@@ -205,7 +244,8 @@
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
-  background: #f9fafb;
+  background: white;
+  border: 1px solid #e5e7eb;
 }
 
 .message-item.client-\>server {
@@ -234,14 +274,15 @@
 
 .message-time {
   font-size: 0.75rem;
-  color: #666;
+  color: #6b7280;
 }
 
 .operation-item {
   padding: 0.75rem;
   margin-bottom: 0.5rem;
   border-radius: 8px;
-  background: #f9fafb;
+  background: white;
+  border: 1px solid #e5e7eb;
   border-left: 4px solid #f59e0b;
 }
 
@@ -258,7 +299,7 @@
 
 .operation-time {
   font-size: 0.75rem;
-  color: #666;
+  color: #6b7280;
 }
 
 .empty-state {

@@ -25,10 +25,7 @@
   "include": ["src"],
   "references": [
     {
-      "path": "../packages/eecp-protocol/tsconfig.lib.json"
-    },
-    {
-      "path": "../packages/eecp-browser"
+      "path": "../packages/eecp-browser/tsconfig.lib.json"
     }
   ]
 }

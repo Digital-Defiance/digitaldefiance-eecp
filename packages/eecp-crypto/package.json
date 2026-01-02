@@ -1,6 +1,6 @@
 {
   "name": "@digitaldefiance/eecp-crypto",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
@@ -18,13 +18,13 @@
   "author": "Digital Defiance",
   "repository": {
     "type": "git",
-    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "url": "https://github.com/digital-defiance/digitaldefiance-eecp.git",
     "directory": "packages/eecp-crypto"
   },
   "bugs": {
-    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+    "url": "https://github.com/digital-defiance/digitaldefiance-eecp/issues"
   },
-  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "homepage": "https://github.com/digital-defiance/digitaldefiance-eecp#readme",
   "publishConfig": {
     "access": "public"
   },
@@ -43,7 +43,7 @@
   },
   "dependencies": {
     "@digitaldefiance/ecies-lib": "^4.7.14",
-    "@digitaldefiance/eecp-protocol": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.1",
     "tslib": "^2.3.0"
   }
 }

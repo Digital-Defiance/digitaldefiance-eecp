@@ -1,6 +1,6 @@
 {
   "name": "@digitaldefiance/eecp-server",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Express + WebSocket server for EECP operation routing",
   "keywords": [
     "eecp",
@@ -129,8 +129,8 @@
     }
   },
   "dependencies": {
-    "@digitaldefiance/eecp-crypto": "^0.1.0",
-    "@digitaldefiance/eecp-protocol": "^0.1.0",
+    "@digitaldefiance/eecp-crypto": "^0.1.1",
+    "@digitaldefiance/eecp-protocol": "^0.1.1",
     "express": "^4.21.2",
     "uuid": "^13.0.0",
     "ws": "^8.18.3"

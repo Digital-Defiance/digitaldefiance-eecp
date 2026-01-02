@@ -78,8 +78,8 @@ This is an Nx monorepo containing the following packages:
 
 ```bash
 # Clone the repository
-git clone https://github.com/digitaldefiance/eecp-lib.git
-cd eecp-lib
+git clone https://github.com/digital-defiance/digitaldefiance-eecp.git
+cd digitaldefiance-eecp
 
 # Install dependencies
 yarn install
@@ -324,7 +324,7 @@ const client = new EECPClient('ws://localhost:3000', {
 ### Project Structure
 
 ```
-eecp-lib/
+digitaldefiance-eecp/
 ├── packages/
 │   ├── eecp-protocol/      # Core types and interfaces
 │   ├── eecp-crypto/        # Cryptographic primitives
@@ -332,6 +332,7 @@ eecp-lib/
 │   ├── eecp-server/        # WebSocket server
 │   ├── eecp-client/        # Browser client
 │   ├── eecp-cli/           # Command-line interface
+|   ├── eecp-browser/       # Browser demo server/client components
 │   └── eecp-demo/          # Demo application
 ├── .kiro/
 │   └── specs/
@@ -477,13 +478,13 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Built with [Nx](https://nx.dev) - Smart Monorepos · Fast CI
 - Uses [Yjs](https://yjs.dev) for CRDT implementation
-- Encryption powered by [@digitaldefiance/ecies-lib](https://github.com/digitaldefiance/ecies-lib)
+- Encryption powered by [@digitaldefiance/ecies-lib](https://github.com/digital-defiance/digitaldefiance-eecp)
 - WebSocket server built with [Express](https://expressjs.com) and [ws](https://github.com/websockets/ws)
 
 ## 📞 Support
 
-- **Issues**: [GitHub Issues](https://github.com/digitaldefiance/eecp-lib/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/digitaldefiance/eecp-lib/discussions)
+- **Issues**: [GitHub Issues](https://github.com/digital-defiance/digitaldefiance-eecp/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/digital-defiance/digitaldefiance-eecp/discussions)
 - **Email**: support@digitaldefiance.org
 
 ## 🗺️ Roadmap

@@ -28,7 +28,8 @@ const components: Component[] = [
       'Core types and protocol definitions for EECP. Defines workspace configuration, encrypted operations, WebSocket message envelopes, and all shared interfaces used across the system.',
     tech: ['TypeScript', 'Protocol Definitions', 'Type Safety'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-protocol',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-protocol',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-protocol',
     category: 'Core',
     highlights: [
       'WorkspaceId, ParticipantId, OperationId type definitions',
@@ -45,7 +46,8 @@ const components: Component[] = [
       'Temporal key management and encryption primitives. Implements HKDF key derivation, AES-256-GCM encryption, ECIES multi-recipient encryption, zero-knowledge authentication, and cryptographic commitments for provable key deletion.',
     tech: ['TypeScript', 'HKDF', 'AES-256-GCM', 'ECIES', 'ECDSA'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-crypto',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-crypto',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-crypto',
     category: 'Crypto',
     stats: {
       tests: '100+ property tests',
@@ -65,7 +67,8 @@ const components: Component[] = [
       'Encrypted conflict-free replicated data types for collaborative editing. Built on Yjs for deterministic conflict resolution with encrypted content payloads, operation encryption/decryption, and temporal garbage collection.',
     tech: ['TypeScript', 'Yjs', 'CRDT', 'Encryption'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-crdt',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-crdt',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-crdt',
     category: 'Core',
     stats: {
       tests: '50+ tests',
@@ -85,7 +88,8 @@ const components: Component[] = [
       'Express + WebSocket server for zero-knowledge operation routing. Manages workspace lifecycle, participant authentication, encrypted operation broadcasting, rate limiting, and temporal cleanup with Prometheus metrics.',
     tech: ['Express 5', 'WebSocket', 'Node.js', 'Prometheus'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-server',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-server',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-server',
     category: 'Server',
     stats: {
       tests: '200+ tests',
@@ -105,7 +109,8 @@ const components: Component[] = [
       'Browser client library with React hooks for collaborative editing. Provides WebSocket connection management, key storage in IndexedDB, collaborative editor with change subscriptions, and automatic reconnection with exponential backoff.',
     tech: ['TypeScript', 'React 19', 'WebSocket', 'IndexedDB'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-client',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-client',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-client',
     category: 'Client',
     stats: {
       tests: '150+ tests',
@@ -125,7 +130,8 @@ const components: Component[] = [
       'Command-line interface for testing and automation. Create workspaces, join sessions, export documents, and interact with EECP from the terminal with a full-featured interactive editor.',
     tech: ['TypeScript', 'Commander.js', 'Node.js'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-cli',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-cli',
+    npm: 'https://www.npmjs.com/package/@digitaldefiance/eecp-cli',
     category: 'Tools',
     highlights: [
       'Create workspaces with configurable duration',
@@ -142,7 +148,7 @@ const components: Component[] = [
       'Reference web application demonstrating EECP capabilities. Features rich text editing with Quill, participant sidebar, countdown timer, shareable links, and document export functionality.',
     tech: ['React 19', 'Vite', 'Quill', 'Material-UI'],
     github:
-      'https://github.com/Digital-Defiance/eecp-lib/tree/main/packages/eecp-demo',
+      'https://github.com/Digital-Defiance/digitaldefiance-eecp/tree/main/packages/eecp-demo',
     category: 'Client',
     highlights: [
       'Rich text editor with formatting controls',

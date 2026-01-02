@@ -225,31 +225,31 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digitaldefiance/eecp-browser@npm:0.1.0":
-  version: 0.1.0
-  resolution: "@digitaldefiance/eecp-browser@npm:0.1.0"
+"@digitaldefiance/eecp-browser@npm:0.1.1":
+  version: 0.1.1
+  resolution: "@digitaldefiance/eecp-browser@npm:0.1.1"
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    "@digitaldefiance/eecp-client": "npm:^0.1.0"
-    "@digitaldefiance/eecp-crdt": "npm:^0.1.0"
-    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
-    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    "@digitaldefiance/eecp-client": "npm:^0.1.1"
+    "@digitaldefiance/eecp-crdt": "npm:^0.1.1"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.1"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.1"
     events: "npm:^3.3.0"
     tslib: "npm:^2.8.1"
   peerDependencies:
     buffer: ^6.0.3
-  checksum: 10c0/909f1fecc7a39fdb0837746b463d9f437054e13514f9f0cede9361c40b749626ccd113b7c671cef8ed2c6ac305a0e95483d8e2d9168c13de218bcd64854b2e57
+  checksum: 10c0/5c2fec55c2097fa4e16bbd000b5be48e5430f638c654f62a44bbf5fc565d73e7743b541c40562164b1e85bfac0e6543d8aa28e9985902ec5d325a9e4d3a7b727
   languageName: node
   linkType: hard
 
-"@digitaldefiance/eecp-client@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@digitaldefiance/eecp-client@npm:0.1.0"
+"@digitaldefiance/eecp-client@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@digitaldefiance/eecp-client@npm:0.1.1"
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    "@digitaldefiance/eecp-crdt": "npm:^0.1.0"
-    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
-    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crdt": "npm:^0.1.1"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.1"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.1"
     tslib: "npm:^2.3.0"
     ws: "npm:^8.18.3"
   peerDependencies:
@@ -257,41 +257,41 @@ __metadata:
   peerDependenciesMeta:
     react:
       optional: true
-  checksum: 10c0/2181d14531b57b28e51a71325ac1cef578970d947b9c744550ba0596b91b24de4a031edd31d8359115820ae390dc697cd58010ea96877df9e2f6e2302ec98fc7
+  checksum: 10c0/fde2bfb2a915e5b858c19f5418acefb25530b400182248ffcc1551c3cef6f3725b107ae2bb226fe97780a3f2f22230dc62e065ba6ba107439ed436d53438f437
   languageName: node
   linkType: hard
 
-"@digitaldefiance/eecp-crdt@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@digitaldefiance/eecp-crdt@npm:0.1.0"
+"@digitaldefiance/eecp-crdt@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@digitaldefiance/eecp-crdt@npm:0.1.1"
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
-    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.1"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.1"
     tslib: "npm:^2.3.0"
     yjs: "npm:^13.6.27"
-  checksum: 10c0/9f806b8488802a3833b40f6bcbd8890dcb674f717404676b9522b72a7fc150b8a2d8a7a757eaa302e95eb7619e2778f7e9ed676b70db0151100152b8b8d94cba
+  checksum: 10c0/4b5ed70bf6749316d70e7052cb4142e40f6f07ebc8093c18533ce5ed3d354b90c3aa77ccb3169feb660937f2143f29efc969b7df8a1e41ca34e23ed58022b65f
   languageName: node
   linkType: hard
 
-"@digitaldefiance/eecp-crypto@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@digitaldefiance/eecp-crypto@npm:0.1.0"
+"@digitaldefiance/eecp-crypto@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@digitaldefiance/eecp-crypto@npm:0.1.1"
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.1"
     tslib: "npm:^2.3.0"
-  checksum: 10c0/2d554c34db261f02ce9538ace80b921bafa0ac211fc2f871437cc12b18e61bd4e672b908d197fca31c75d7c0afec8b261f2b6e8821905bfcea1cde63b2d81968
+  checksum: 10c0/649cb1099a86c0f616d59bda8d0479650f666a8b872b9061d8b518a201e03d8c18ef4b170bb177ad3ecc068756d1f5048106eb7cbe477e1cfb31abbd85e17597
   languageName: node
   linkType: hard
 
-"@digitaldefiance/eecp-protocol@npm:^0.1.0":
-  version: 0.1.0
-  resolution: "@digitaldefiance/eecp-protocol@npm:0.1.0"
+"@digitaldefiance/eecp-protocol@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@digitaldefiance/eecp-protocol@npm:0.1.1"
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:^4.7.14"
     tslib: "npm:^2.3.0"
-  checksum: 10c0/c597da18a65b18259eb700ffc795671608c62e3d71743cca8cc1025e9e1ceca41a8bc85f930779b0f94e059f0c89652d33c9cf485086e6f68d9e259ca93c952a
+  checksum: 10c0/8b56cd30bf55c84298d48127e462284f31d2484381fb154979187ec7b0750f053edb4ed3ffb7e27f772ab47fad805f2efe08da4af4a581c5ea0d40ffcf3d91ac
   languageName: node
   linkType: hard
 
@@ -1861,7 +1861,7 @@ __metadata:
   resolution: "eecp-showcase@workspace:."
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:4.7.14"
-    "@digitaldefiance/eecp-browser": "npm:0.1.0"
+    "@digitaldefiance/eecp-browser": "npm:0.1.1"
     "@eslint/js": "npm:^9.39.1"
     "@noble/curves": "npm:1.9.0"
     "@noble/hashes": "npm:1.8.0"

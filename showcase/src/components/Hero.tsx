@@ -73,7 +73,7 @@ const Hero = ({ scrollY }: HeroProps) => {
           transition={{ delay: 0.9, duration: 0.8 }}
         >
           <a
-            href="https://github.com/Digital-Defiance/eecp-lib"
+            href="https://github.com/Digital-Defiance/digitaldefiance-eecp"
             className="btn btn-secondary"
             target="_blank"
             rel="noopener noreferrer"

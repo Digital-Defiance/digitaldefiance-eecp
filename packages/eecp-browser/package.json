@@ -1,6 +1,6 @@
 {
   "name": "@digitaldefiance/eecp-browser",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Browser-compatible EECP client and server implementations",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -37,10 +37,10 @@
   },
   "dependencies": {
     "@digitaldefiance/ecies-lib": "^4.7.14",
-    "@digitaldefiance/eecp-client": "^0.1.0",
-    "@digitaldefiance/eecp-crdt": "^0.1.0",
-    "@digitaldefiance/eecp-crypto": "^0.1.0",
-    "@digitaldefiance/eecp-protocol": "^0.1.0",
+    "@digitaldefiance/eecp-client": "^0.1.1",
+    "@digitaldefiance/eecp-crdt": "^0.1.1",
+    "@digitaldefiance/eecp-crypto": "^0.1.1",
+    "@digitaldefiance/eecp-protocol": "^0.1.1",
     "events": "^3.3.0",
     "tslib": "^2.8.1"
   },

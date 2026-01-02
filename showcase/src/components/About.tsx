@@ -144,7 +144,7 @@ const About = () => {
               Visit Digital Defiance on GitHub
             </a>
             <a
-              href="https://github.com/Digital-Defiance/eecp-lib"
+              href="https://github.com/Digital-Defiance/digitaldefiance-eecp"
               target="_blank"
               rel="noopener noreferrer"
               className="btn btn-secondary"
@@ -162,7 +162,7 @@ const About = () => {
           </p>
           <p className="footer-links">
             <a
-              href="https://github.com/Digital-Defiance/eecp-lib/blob/main/LICENSE"
+              href="https://github.com/Digital-Defiance/digitaldefiance-eecp/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -170,7 +170,7 @@ const About = () => {
             </a>
             {" • "}
             <a
-              href="https://github.com/Digital-Defiance/eecp-lib"
+              href="https://github.com/Digital-Defiance/digitaldefiance-eecp"
               target="_blank"
               rel="noopener noreferrer"
             >

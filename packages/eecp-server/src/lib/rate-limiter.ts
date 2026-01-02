@@ -44,7 +44,7 @@
  * ```
  */
 
-import { WorkspaceId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceId, ParticipantId } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Rate limit configuration options.

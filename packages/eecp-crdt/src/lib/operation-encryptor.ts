@@ -25,12 +25,12 @@ import {
   CRDTOperation, 
   EncryptedOperation, 
   WorkspaceId 
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { 
   ITimeLockedEncryption, 
   TemporalKey,
   eciesService,
-} from '@digitaldefiance-eecp/eecp-crypto';
+} from '@digitaldefiance/eecp-crypto';
 import { createSign, createVerify } from 'crypto';
 
 /**

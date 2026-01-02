@@ -20,7 +20,7 @@
  */
 
 import * as Y from 'yjs';
-import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import { generateUUID } from './uuid-utils.js';
 

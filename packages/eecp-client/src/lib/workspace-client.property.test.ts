@@ -13,7 +13,7 @@ import {
   WorkspaceMetadata,
   ParticipantId,
   WorkspaceId,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { WebSocket } from 'ws';
 
 /**

@@ -7,7 +7,7 @@
 
 import { Command } from 'commander';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
-import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
+import { EECPClient } from '@digitaldefiance/eecp-client';
 import { CLICommands } from './lib/cli-commands.js';
 
 const program = new Command();

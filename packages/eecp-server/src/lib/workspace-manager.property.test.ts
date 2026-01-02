@@ -5,7 +5,7 @@
 
 import * as fc from 'fast-check';
 import { WorkspaceManager } from './workspace-manager.js';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { ECIESService, Member } from '@digitaldefiance/ecies-lib';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 

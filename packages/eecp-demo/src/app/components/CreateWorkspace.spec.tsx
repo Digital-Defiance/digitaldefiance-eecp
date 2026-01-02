@@ -21,7 +21,7 @@ jest.mock('react-router-dom', () => ({
 }));
 
 // Mock the EECP client
-jest.mock('@digitaldefiance-eecp/eecp-client', () => ({
+jest.mock('@digitaldefiance/eecp-client', () => ({
   EECPClient: jest.fn().mockImplementation(() => ({
     connect: jest.fn().mockResolvedValue(undefined),
     createWorkspace: jest.fn().mockResolvedValue({

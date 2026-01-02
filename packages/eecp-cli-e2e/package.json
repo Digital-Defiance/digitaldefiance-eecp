@@ -1,10 +1,10 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-cli-e2e",
+  "name": "@digitaldefiance/eecp-cli-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@digitaldefiance-eecp/eecp-cli"
+      "@digitaldefiance/eecp-cli"
     ],
     "targets": {
       "e2e": {
@@ -17,7 +17,7 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@digitaldefiance-eecp/eecp-cli:build"
+          "@digitaldefiance/eecp-cli:build"
         ]
       }
     }

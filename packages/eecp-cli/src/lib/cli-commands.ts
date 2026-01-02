@@ -19,7 +19,7 @@
  * @example
  * ```typescript
  * import { CLICommands } from './cli-commands';
- * import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
+ * import { EECPClient } from '@digitaldefiance/eecp-client';
  * 
  * const client = new EECPClient();
  * await client.connect('ws://localhost:3000');
@@ -50,8 +50,8 @@ import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import {
   WorkspaceId,
   WorkspaceConfig,
-} from '@digitaldefiance-eecp/eecp-protocol';
-import { IEECPClient } from '@digitaldefiance-eecp/eecp-client';
+} from '@digitaldefiance/eecp-protocol';
+import { IEECPClient } from '@digitaldefiance/eecp-client';
 
 /**
  * Options for creating a workspace via CLI.

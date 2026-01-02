@@ -9,7 +9,7 @@
  */
 
 import { createHmac } from 'crypto';
-import { TimeWindow } from '@digitaldefiance-eecp/eecp-protocol';
+import { TimeWindow } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Temporal key with validity period and grace period

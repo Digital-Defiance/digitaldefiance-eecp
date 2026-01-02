@@ -5,8 +5,8 @@
 import * as fc from 'fast-check';
 import { generateKeyPairSync } from 'crypto';
 import { OperationEncryptor } from './operation-encryptor.js';
-import { TimeLockedEncryption } from '@digitaldefiance-eecp/eecp-crypto';
-import { CRDTOperation, OperationId, ParticipantId, WorkspaceId } from '@digitaldefiance-eecp/eecp-protocol';
+import { TimeLockedEncryption } from '@digitaldefiance/eecp-crypto';
+import { CRDTOperation, OperationId, ParticipantId, WorkspaceId } from '@digitaldefiance/eecp-protocol';
 
 describe('OperationEncryptor Property Tests', () => {
   const encryption = new TimeLockedEncryption();

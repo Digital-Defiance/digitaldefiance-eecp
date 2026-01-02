@@ -8,7 +8,7 @@
  */
 
 import { useParams, useLocation } from 'react-router-dom';
-import { useWorkspace, useCollaboration } from '@digitaldefiance-eecp/eecp-client';
+import { useWorkspace, useCollaboration } from '@digitaldefiance/eecp-client';
 import { WorkspaceHeader } from './WorkspaceHeader';
 import { RichTextEditor } from './RichTextEditor';
 import { ParticipantSidebar } from './ParticipantSidebar';

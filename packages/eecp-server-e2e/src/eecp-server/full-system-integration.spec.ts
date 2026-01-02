@@ -7,18 +7,18 @@
  * Requirements: 1.1, 1.4, 2.3, 2.4, 4.7, 8.3, 18.1
  */
 
-import { EECPServer } from '@digitaldefiance-eecp/eecp-server';
-import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
-import { WorkspaceManager } from '@digitaldefiance-eecp/eecp-server';
-import { ParticipantManager } from '@digitaldefiance-eecp/eecp-server';
-import { OperationRouter } from '@digitaldefiance-eecp/eecp-server';
-import { TemporalCleanupService } from '@digitaldefiance-eecp/eecp-server';
-import { TemporalKeyDerivation } from '@digitaldefiance-eecp/eecp-crypto';
-import { TimeLockedEncryption } from '@digitaldefiance-eecp/eecp-crypto';
-import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
-import { CommitmentScheme } from '@digitaldefiance-eecp/eecp-crypto';
+import { EECPServer } from '@digitaldefiance/eecp-server';
+import { EECPClient } from '@digitaldefiance/eecp-client';
+import { WorkspaceManager } from '@digitaldefiance/eecp-server';
+import { ParticipantManager } from '@digitaldefiance/eecp-server';
+import { OperationRouter } from '@digitaldefiance/eecp-server';
+import { TemporalCleanupService } from '@digitaldefiance/eecp-server';
+import { TemporalKeyDerivation } from '@digitaldefiance/eecp-crypto';
+import { TimeLockedEncryption } from '@digitaldefiance/eecp-crypto';
+import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
+import { CommitmentScheme } from '@digitaldefiance/eecp-crypto';
 import { ECIESService } from '@digitaldefiance/ecies-lib';
-import { getEciesConfig } from '@digitaldefiance-eecp/eecp-crypto';
+import { getEciesConfig } from '@digitaldefiance/eecp-crypto';
 import * as http from 'http';
 import WebSocket from 'ws';
 

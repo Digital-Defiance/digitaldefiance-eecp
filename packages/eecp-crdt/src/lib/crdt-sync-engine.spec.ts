@@ -4,7 +4,7 @@
  */
 
 import { CRDTSyncEngine } from './crdt-sync-engine';
-import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { generateUUID } from './uuid-utils.js';
 
 describe('CRDTSyncEngine', () => {

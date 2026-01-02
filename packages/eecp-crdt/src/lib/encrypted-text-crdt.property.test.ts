@@ -5,7 +5,7 @@
 
 import * as fc from 'fast-check';
 import { EncryptedTextCRDT } from './encrypted-text-crdt.js';
-import type { CRDTOperation, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation, ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { generateUUID } from './uuid-utils.js';
 
 /**

@@ -6,7 +6,7 @@
  * Requirements: 14.2
  */
 
-import { ParticipantInfo } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantInfo } from '@digitaldefiance/eecp-protocol';
 
 interface ParticipantSidebarProps {
   participants: ParticipantInfo[];

@@ -51,7 +51,7 @@ import {
   SyncResponseMessage,
   ErrorMessage,
   ErrorCode,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 
 /**
  * Browser-compatible base64 encoding
@@ -574,7 +574,15 @@ export class BrowserEECPServer extends EventEmitter {
 
       // Broadcast to all participants except sender
       for (const participant of workspace.participants.values()) {
-        if (participant.participantId.asFullHexGuid !== operation.participantId.asFullHexGuid) {
+        // Compare participant IDs - handle both GuidV4 objects and reconstructed mock objects
+        const participantIdStr = typeof participant.participantId === 'object' && participant.participantId.asFullHexGuid 
+          ? participant.participantId.asFullHexGuid 
+          : participant.participantId.toString();
+        const operationIdStr = typeof operation.participantId === 'object' && operation.participantId.asFullHexGuid
+          ? operation.participantId.asFullHexGuid
+          : operation.participantId.toString();
+        
+        if (participantIdStr !== operationIdStr) {
           try {
             if (participant.transport.isConnected()) {
               this.sendMessage(participant.transport, 'operation', message);

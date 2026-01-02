@@ -12,18 +12,18 @@
  * from regular test suites. Use: nx e2e eecp-server-e2e --testNamePattern="Load Tests"
  */
 
-import { WorkspaceManager } from '@digitaldefiance-eecp/eecp-server';
-import { ParticipantManager } from '@digitaldefiance-eecp/eecp-server';
-import { OperationRouter } from '@digitaldefiance-eecp/eecp-server';
-import { TemporalKeyDerivation } from '@digitaldefiance-eecp/eecp-crypto';
-import { TimeLockedEncryption } from '@digitaldefiance-eecp/eecp-crypto';
-import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
-import { CommitmentScheme } from '@digitaldefiance-eecp/eecp-crypto';
-import { EncryptedTextCRDT } from '@digitaldefiance-eecp/eecp-crdt';
-import { OperationEncryptor } from '@digitaldefiance-eecp/eecp-crdt';
+import { WorkspaceManager } from '@digitaldefiance/eecp-server';
+import { ParticipantManager } from '@digitaldefiance/eecp-server';
+import { OperationRouter } from '@digitaldefiance/eecp-server';
+import { TemporalKeyDerivation } from '@digitaldefiance/eecp-crypto';
+import { TimeLockedEncryption } from '@digitaldefiance/eecp-crypto';
+import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
+import { CommitmentScheme } from '@digitaldefiance/eecp-crypto';
+import { EncryptedTextCRDT } from '@digitaldefiance/eecp-crdt';
+import { OperationEncryptor } from '@digitaldefiance/eecp-crdt';
 import { ECIESService } from '@digitaldefiance/ecies-lib';
-import { getEciesConfig } from '@digitaldefiance-eecp/eecp-crypto';
-import type { WorkspaceConfig, CRDTOperation } from '@digitaldefiance-eecp/eecp-protocol';
+import { getEciesConfig } from '@digitaldefiance/eecp-crypto';
+import type { WorkspaceConfig, CRDTOperation } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Helper function to measure memory usage

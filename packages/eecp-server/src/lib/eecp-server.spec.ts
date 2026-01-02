@@ -10,8 +10,8 @@ import { OperationRouter } from './operation-router';
 import { TemporalCleanupService } from './temporal-cleanup-service';
 import { RateLimiter } from './rate-limiter';
 import { MetricsService } from './metrics-service';
-import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { GuidV4, ECIESService, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 import axios from 'axios';
 

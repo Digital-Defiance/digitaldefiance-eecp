@@ -1,24 +1,51 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-crdt",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-crdt",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "description": "Encrypted CRDT implementation using Yjs for EECP",
+  "keywords": [
+    "eecp",
+    "crdt",
+    "yjs",
+    "encryption",
+    "collaboration",
+    "conflict-free",
+    "real-time"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-crdt"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "@digitaldefiance/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
   "dependencies": {
-    "@digitaldefiance-eecp/eecp-crypto": "0.0.1",
-    "@digitaldefiance-eecp/eecp-protocol": "*",
     "@digitaldefiance/ecies-lib": "^4.7.14",
+    "@digitaldefiance/eecp-crypto": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
     "tslib": "^2.3.0",
     "yjs": "^13.6.27"
   }

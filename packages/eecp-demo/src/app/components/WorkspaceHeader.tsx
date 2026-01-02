@@ -7,7 +7,7 @@
  */
 
 import { useState, useEffect } from 'react';
-import { IWorkspaceClient } from '@digitaldefiance-eecp/eecp-client';
+import { IWorkspaceClient } from '@digitaldefiance/eecp-client';
 
 interface WorkspaceHeaderProps {
   workspace: IWorkspaceClient;

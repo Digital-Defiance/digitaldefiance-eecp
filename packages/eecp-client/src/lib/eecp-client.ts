@@ -19,7 +19,7 @@
  * 
  * @example
  * ```typescript
- * import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
+ * import { EECPClient } from '@digitaldefiance/eecp-client';
  * import { GuidV4 } from '@digitaldefiance/ecies-lib';
  * 
  * // Create client
@@ -65,7 +65,7 @@ import {
   ZeroKnowledgeProof,
   ChallengeMessage,
   WorkspaceMetadata,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import { WorkspaceClient, IWorkspaceClient } from './workspace-client.js';
 import { ClientKeyManager, IClientKeyManager } from './client-key-manager.js';

@@ -1,8 +1,33 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-cli",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-cli",
+  "version": "0.1.0",
   "type": "module",
+  "description": "Command-line interface for EECP testing and automation",
+  "keywords": [
+    "eecp",
+    "cli",
+    "command-line",
+    "automation",
+    "testing"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-cli"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "bin": {
     "eecp": "./dist/cli.js"
   },
@@ -90,15 +115,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@digitaldefiance-eecp/eecp-cli:build",
+          "buildTarget": "@digitaldefiance/eecp-cli:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@digitaldefiance-eecp/eecp-cli:build:development"
+            "buildTarget": "@digitaldefiance/eecp-cli:build:development"
           },
           "production": {
-            "buildTarget": "@digitaldefiance-eecp/eecp-cli:build:production"
+            "buildTarget": "@digitaldefiance/eecp-cli:build:production"
           }
         }
       },
@@ -110,9 +135,9 @@
     }
   },
   "dependencies": {
-    "@digitaldefiance-eecp/eecp-client": "*",
-    "@digitaldefiance-eecp/eecp-protocol": "*",
     "@digitaldefiance/ecies-lib": "^4.7.14",
+    "@digitaldefiance/eecp-client": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
     "commander": "^14.0.2",
     "express": "^4.21.2"
   }

@@ -1,6 +1,6 @@
 import * as fc from 'fast-check';
 import { TemporalKeyDerivation } from './temporal-key-derivation.js';
-import { TimeWindow } from '@digitaldefiance-eecp/eecp-protocol';
+import { TimeWindow } from '@digitaldefiance/eecp-protocol';
 
 describe('TemporalKeyDerivation Property Tests', () => {
   const derivation = new TemporalKeyDerivation();

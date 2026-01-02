@@ -23,7 +23,7 @@
  * @example
  * ```typescript
  * import { ParticipantManager } from './participant-manager';
- * import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+ * import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
  * import { AuditLogger } from './audit-logger';
  * 
  * const auth = new ParticipantAuth();
@@ -48,11 +48,11 @@
 import {
   WorkspaceId,
   ParticipantId,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import {
   HandshakeMessage,
-} from '@digitaldefiance-eecp/eecp-protocol';
-import { IParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
+} from '@digitaldefiance/eecp-protocol';
+import { IParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
 import { Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
 import { IAuditLogger } from './audit-logger';
 

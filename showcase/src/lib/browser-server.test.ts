@@ -6,7 +6,7 @@
 
 import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 import { BrowserEECPServer, BrowserTransport } from './browser-server';
-import { WorkspaceConfig, MessageEnvelope } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceConfig, MessageEnvelope } from '@digitaldefiance/eecp-protocol';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 
 describe('BrowserEECPServer', () => {

@@ -44,11 +44,11 @@ import {
   WorkspaceId,
   ParticipantId,
   EncryptedOperation,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import {
   MessageEnvelope,
   OperationMessage,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { IParticipantManager } from './participant-manager.js';
 import { IWorkspaceManager } from './workspace-manager.js';
 import { v4 as uuidv4 } from 'uuid';

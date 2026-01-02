@@ -216,7 +216,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digitaldefiance/ecies-lib@npm:4.7.14":
+"@digitaldefiance/ecies-lib@npm:4.7.14, @digitaldefiance/ecies-lib@npm:^4.7.14":
   version: 4.7.14
   resolution: "@digitaldefiance/ecies-lib@npm:4.7.14"
   dependencies:
@@ -229,6 +229,59 @@ __metadata:
     paillier-bigint: "npm:^3.4.1"
     ts-brand: "npm:^0.2.0"
   checksum: 10c0/6e80612d9b165edafd5621c81fc2b63447b4eb896a47403aba4ffbd18034342a5105a553ad6c5efb7c9794a3f0406655ce26b8723c0b56d4f564a9af7819392f
+  languageName: node
+  linkType: hard
+
+"@digitaldefiance/eecp-client@npm:0.1.0":
+  version: 0.1.0
+  resolution: "@digitaldefiance/eecp-client@npm:0.1.0"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-crdt": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+    ws: "npm:^8.18.3"
+  peerDependencies:
+    react: ^19.2.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+  checksum: 10c0/2181d14531b57b28e51a71325ac1cef578970d947b9c744550ba0596b91b24de4a031edd31d8359115820ae390dc697cd58010ea96877df9e2f6e2302ec98fc7
+  languageName: node
+  linkType: hard
+
+"@digitaldefiance/eecp-crdt@npm:0.1.0, @digitaldefiance/eecp-crdt@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@digitaldefiance/eecp-crdt@npm:0.1.0"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+    yjs: "npm:^13.6.27"
+  checksum: 10c0/9f806b8488802a3833b40f6bcbd8890dcb674f717404676b9522b72a7fc150b8a2d8a7a757eaa302e95eb7619e2778f7e9ed676b70db0151100152b8b8d94cba
+  languageName: node
+  linkType: hard
+
+"@digitaldefiance/eecp-crypto@npm:0.1.0, @digitaldefiance/eecp-crypto@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@digitaldefiance/eecp-crypto@npm:0.1.0"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+  checksum: 10c0/2d554c34db261f02ce9538ace80b921bafa0ac211fc2f871437cc12b18e61bd4e672b908d197fca31c75d7c0afec8b261f2b6e8821905bfcea1cde63b2d81968
+  languageName: node
+  linkType: hard
+
+"@digitaldefiance/eecp-protocol@npm:0.1.0, @digitaldefiance/eecp-protocol@npm:^0.1.0":
+  version: 0.1.0
+  resolution: "@digitaldefiance/eecp-protocol@npm:0.1.0"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    tslib: "npm:^2.3.0"
+  checksum: 10c0/c597da18a65b18259eb700ffc795671608c62e3d71743cca8cc1025e9e1ceca41a8bc85f930779b0f94e059f0c89652d33c9cf485086e6f68d9e259ca93c952a
   languageName: node
   linkType: hard
 
@@ -1715,6 +1768,10 @@ __metadata:
   resolution: "eecp-showcase@workspace:."
   dependencies:
     "@digitaldefiance/ecies-lib": "npm:4.7.14"
+    "@digitaldefiance/eecp-client": "npm:0.1.0"
+    "@digitaldefiance/eecp-crdt": "npm:0.1.0"
+    "@digitaldefiance/eecp-crypto": "npm:0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:0.1.0"
     "@eslint/js": "npm:^9.39.1"
     "@noble/curves": "npm:1.9.0"
     "@noble/hashes": "npm:1.8.0"
@@ -2537,6 +2594,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"isomorphic.js@npm:^0.2.4":
+  version: 0.2.5
+  resolution: "isomorphic.js@npm:0.2.5"
+  checksum: 10c0/7cd268c8e58146a8160c8cd16596291fd1fbf3e8799a325f269accda9dc1238806e371ccef0b66fe2ad957209230c55997248d8b6d02cf2d7c575ffeb759c789
+  languageName: node
+  linkType: hard
+
 "js-md5@npm:^0.8.3":
   version: 0.8.3
   resolution: "js-md5@npm:0.8.3"
@@ -2653,6 +2717,19 @@ __metadata:
     prelude-ls: "npm:^1.2.1"
     type-check: "npm:~0.4.0"
   checksum: 10c0/effb03cad7c89dfa5bd4f6989364bfc79994c2042ec5966cb9b95990e2edee5cd8969ddf42616a0373ac49fac1403437deaf6e9050fbbaa3546093a59b9ac94e
+  languageName: node
+  linkType: hard
+
+"lib0@npm:^0.2.99":
+  version: 0.2.117
+  resolution: "lib0@npm:0.2.117"
+  dependencies:
+    isomorphic.js: "npm:^0.2.4"
+  bin:
+    0ecdsa-generate-keypair: bin/0ecdsa-generate-keypair.js
+    0gentesthtml: bin/gentesthtml.js
+    0serve: bin/0serve.js
+  checksum: 10c0/d1b9205890d5d0cbd95ffdb0d6df6f9fd2c315b89e195fc9b015f3778046fb34bc12e94205ccf410a3073b836444045dcef6671fa2f6d5a7f70ebf8b6b0c0616
   languageName: node
   linkType: hard
 
@@ -3566,7 +3643,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"tslib@npm:^2.4.0, tslib@npm:^2.8.1":
+"tslib@npm:^2.3.0, tslib@npm:^2.4.0, tslib@npm:^2.8.1":
   version: 2.8.1
   resolution: "tslib@npm:2.8.1"
   checksum: 10c0/9c4759110a19c53f992d9aae23aac5ced636e99887b51b9e61def52611732872ff7668757d4e4c61f19691e36f4da981cd9485e869b4a7408d689f6bf1f14e62
@@ -3890,7 +3967,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ws@npm:^8.13.0":
+"ws@npm:^8.13.0, ws@npm:^8.18.3":
   version: 8.18.3
   resolution: "ws@npm:8.18.3"
   peerDependencies:
@@ -3937,6 +4014,15 @@ __metadata:
   version: 5.0.0
   resolution: "yallist@npm:5.0.0"
   checksum: 10c0/a499c81ce6d4a1d260d4ea0f6d49ab4da09681e32c3f0472dee16667ed69d01dae63a3b81745a24bd78476ec4fcf856114cb4896ace738e01da34b2c42235416
+  languageName: node
+  linkType: hard
+
+"yjs@npm:^13.6.27":
+  version: 13.6.28
+  resolution: "yjs@npm:13.6.28"
+  dependencies:
+    lib0: "npm:^0.2.99"
+  checksum: 10c0/c0bfa00d6cbc2f34cd7503796f60a027288d10eb1d93ad35ae3cec5ff1a84410816bbc72a7f1a121ce5af62cd0e427177d6411c7883791f6440f30f1d96cfd0f
   languageName: node
   linkType: hard
 

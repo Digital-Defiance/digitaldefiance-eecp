@@ -8,12 +8,12 @@ import { Member, GuidV4, MemberType, EmailString, ECIESService } from '@digitald
 import { OperationRouter } from './operation-router.js';
 import { ParticipantManager } from './participant-manager.js';
 import { WorkspaceManager } from './workspace-manager.js';
-import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
+import { ParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
 import {
   WorkspaceConfig,
   EncryptedOperation,
   ParticipantId,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 
 /**
  * Helper function to create a test member with required parameters

@@ -5,7 +5,7 @@
  */
 
 import { useEffect, useRef, useState } from 'react';
-import { MessageEnvelope } from '@digitaldefiance-eecp/eecp-protocol';
+import { MessageEnvelope } from '@digitaldefiance/eecp-protocol';
 import './MessageFlow.css';
 
 interface MessageFlowProps {

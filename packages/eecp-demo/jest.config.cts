@@ -1,5 +1,5 @@
 module.exports = {
-  displayName: '@digitaldefiance-eecp/eecp-demo',
+  displayName: '@digitaldefiance/eecp-demo',
   preset: '../../jest.preset.js',
   transform: {
     '^(?!.*\\.(js|jsx|ts|tsx|css|json)$)': '@nx/react/plugins/jest',

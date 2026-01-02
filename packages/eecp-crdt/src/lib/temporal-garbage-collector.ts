@@ -15,7 +15,7 @@
  * @module temporal-garbage-collector
  */
 
-import type { CRDTOperation } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Interface for temporal garbage collection operations

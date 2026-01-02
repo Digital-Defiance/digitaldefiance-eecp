@@ -8,7 +8,7 @@
 import { useState, useEffect, useRef } from 'react';
 import { BrowserEECPServer, BrowserTransport } from '../lib/browser-server';
 import { MessageBus, createMessageBus } from '../lib/message-bus';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { ECIESService } from '@digitaldefiance/ecies-lib';
 import MessageFlow from './MessageFlow';
 import CRDTVisualizer from './CRDTVisualizer';

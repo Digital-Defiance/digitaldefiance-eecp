@@ -7,7 +7,7 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest';
 import { BrowserEECPClient } from './browser-client';
 import { BrowserEECPServer } from './browser-server';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import 'fake-indexeddb/auto';
 

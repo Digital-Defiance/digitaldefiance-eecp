@@ -1,15 +1,42 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-protocol",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-protocol",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "description": "Core types and protocol definitions for the Ephemeral Encrypted Collaboration Protocol (EECP)",
+  "keywords": [
+    "eecp",
+    "encryption",
+    "collaboration",
+    "ephemeral",
+    "zero-knowledge",
+    "protocol",
+    "temporal-encryption"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-protocol"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "@digitaldefiance/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"

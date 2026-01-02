@@ -3,7 +3,7 @@
  */
 
 import { WorkspaceManager } from './workspace-manager.js';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import { randomUUID } from 'crypto';
 import { ECIESService, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 

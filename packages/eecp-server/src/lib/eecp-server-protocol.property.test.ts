@@ -11,8 +11,8 @@ import { OperationRouter } from './operation-router';
 import { TemporalCleanupService } from './temporal-cleanup-service';
 import { RateLimiter } from './rate-limiter';
 import { MetricsService } from './metrics-service';
-import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 import {
   MessageEnvelope,
   HandshakeMessage,
@@ -20,7 +20,7 @@ import {
   OperationMessage,
   OperationAckMessage,
   ZeroKnowledgeProof,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import WebSocket from 'ws';
 import { Member, MemberType, EmailString, GuidV4, ECIESService } from '@digitaldefiance/ecies-lib';
 

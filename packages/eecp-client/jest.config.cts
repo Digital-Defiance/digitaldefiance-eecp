@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 module.exports = {
-  displayName: '@digitaldefiance-eecp/eecp-client',
+  displayName: '@digitaldefiance/eecp-client',
   preset: '../../jest.preset.js',
   testEnvironment: 'jsdom',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

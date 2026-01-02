@@ -10,7 +10,7 @@ import {
   ParticipantId,
   EncryptedOperation,
   WorkspaceConfig,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { IMultiEncryptedMessage } from '@digitaldefiance/ecies-lib';
 
 describe('OperationRouter', () => {

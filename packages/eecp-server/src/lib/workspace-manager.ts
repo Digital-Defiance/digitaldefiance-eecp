@@ -3,8 +3,8 @@
  * Manages workspace lifecycle including creation, retrieval, extension, and revocation
  */
 
-import { WorkspaceConfig, WorkspaceId, WorkspaceMetadata } from '@digitaldefiance-eecp/eecp-protocol';
-import { MultiRecipientEncryption, Participant } from '@digitaldefiance-eecp/eecp-crypto';
+import { WorkspaceConfig, WorkspaceId, WorkspaceMetadata } from '@digitaldefiance/eecp-protocol';
+import { MultiRecipientEncryption, Participant } from '@digitaldefiance/eecp-crypto';
 import { ECIESService, Member } from '@digitaldefiance/ecies-lib';
 import type { IMultiEncryptedMessage } from '@digitaldefiance/ecies-lib';
 import { IAuditLogger } from './audit-logger';

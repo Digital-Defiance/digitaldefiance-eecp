@@ -7,7 +7,13 @@
     "build": "nx run-many --target=build --all",
     "test": "nx run-many --target=test --all",
     "lint": "nx run-many --target=lint --all",
-    "lint:fix": "nx run-many --target=lint --all --fix"
+    "lint:fix": "nx run-many --target=lint --all --fix",
+    "publish:eecp-protocol": "cd packages/eecp-protocol && npm publish --access public",
+    "publish:eecp-crypto": "cd packages/eecp-crypto && npm publish --access public",
+    "publish:eecp-crdt": "cd packages/eecp-crdt && npm publish --access public",
+    "publish:eecp-client": "cd packages/eecp-client && npm publish --access public",
+    "publish:eecp-server": "cd packages/eecp-server && npm publish --access public",
+    "publish:eecp-cli": "cd packages/eecp-cli && npm publish --access public"
   },
   "resolutions": {
     "@digitaldefiance/ecies-lib": "4.7.14",

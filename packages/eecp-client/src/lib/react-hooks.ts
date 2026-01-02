@@ -14,7 +14,7 @@ import { useState, useEffect, useCallback } from 'react';
 import {
   WorkspaceId,
   ParticipantInfo,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { EECPClient, IEECPClient } from './eecp-client.js';
 import { IWorkspaceClient } from './workspace-client.js';
 

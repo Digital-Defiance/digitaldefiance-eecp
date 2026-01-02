@@ -1,7 +1,7 @@
 import * as fc from 'fast-check';
 import { ClientKeyManager } from './client-key-manager.js';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
-import { TemporalKey } from '@digitaldefiance-eecp/eecp-crypto';
+import { TemporalKey } from '@digitaldefiance/eecp-crypto';
 
 // Simple in-memory IndexedDB mock for faster tests (same as in spec file)
 class MockIndexedDB {

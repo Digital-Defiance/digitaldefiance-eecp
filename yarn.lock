@@ -1561,99 +1561,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@digitaldefiance-eecp/eecp-cli-e2e@workspace:packages/eecp-cli-e2e":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-cli-e2e@workspace:packages/eecp-cli-e2e"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-cli@workspace:packages/eecp-cli":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-cli@workspace:packages/eecp-cli"
-  dependencies:
-    "@digitaldefiance-eecp/eecp-client": "npm:*"
-    "@digitaldefiance-eecp/eecp-protocol": "npm:*"
-    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    commander: "npm:^14.0.2"
-    express: "npm:^4.21.2"
-  bin:
-    eecp: ./dist/cli.js
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-client@npm:*, @digitaldefiance-eecp/eecp-client@workspace:packages/eecp-client":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-client@workspace:packages/eecp-client"
-  dependencies:
-    "@digitaldefiance-eecp/eecp-crdt": "npm:0.0.1"
-    "@digitaldefiance-eecp/eecp-crypto": "npm:0.0.1"
-    "@digitaldefiance-eecp/eecp-protocol": "npm:0.0.1"
-    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    tslib: "npm:^2.3.0"
-    ws: "npm:^8.18.3"
-  peerDependencies:
-    react: ^19.2.0
-  peerDependenciesMeta:
-    react:
-      optional: true
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-crdt@npm:0.0.1, @digitaldefiance-eecp/eecp-crdt@workspace:packages/eecp-crdt":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-crdt@workspace:packages/eecp-crdt"
-  dependencies:
-    "@digitaldefiance-eecp/eecp-crypto": "npm:0.0.1"
-    "@digitaldefiance-eecp/eecp-protocol": "npm:*"
-    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    tslib: "npm:^2.3.0"
-    yjs: "npm:^13.6.27"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-crypto@npm:*, @digitaldefiance-eecp/eecp-crypto@npm:0.0.1, @digitaldefiance-eecp/eecp-crypto@workspace:packages/eecp-crypto":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-crypto@workspace:packages/eecp-crypto"
-  dependencies:
-    "@digitaldefiance-eecp/eecp-protocol": "npm:*"
-    "@digitaldefiance/ecies-lib": "npm:^4.7.6"
-    tslib: "npm:^2.3.0"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-demo@workspace:packages/eecp-demo":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-demo@workspace:packages/eecp-demo"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-protocol@npm:*, @digitaldefiance-eecp/eecp-protocol@npm:0.0.1, @digitaldefiance-eecp/eecp-protocol@workspace:packages/eecp-protocol":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-protocol@workspace:packages/eecp-protocol"
-  dependencies:
-    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
-    tslib: "npm:^2.3.0"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-server-e2e@workspace:packages/eecp-server-e2e":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-server-e2e@workspace:packages/eecp-server-e2e"
-  languageName: unknown
-  linkType: soft
-
-"@digitaldefiance-eecp/eecp-server@workspace:packages/eecp-server":
-  version: 0.0.0-use.local
-  resolution: "@digitaldefiance-eecp/eecp-server@workspace:packages/eecp-server"
-  dependencies:
-    "@digitaldefiance-eecp/eecp-crypto": "npm:*"
-    "@digitaldefiance-eecp/eecp-protocol": "npm:*"
-    express: "npm:^4.21.2"
-    uuid: "npm:^13.0.0"
-    ws: "npm:^8.18.3"
-  languageName: unknown
-  linkType: soft
-
 "@digitaldefiance-eecp/source@workspace:.":
   version: 0.0.0-use.local
   resolution: "@digitaldefiance-eecp/source@workspace:."
@@ -1760,6 +1667,99 @@ __metadata:
   checksum: 10c0/6e80612d9b165edafd5621c81fc2b63447b4eb896a47403aba4ffbd18034342a5105a553ad6c5efb7c9794a3f0406655ce26b8723c0b56d4f564a9af7819392f
   languageName: node
   linkType: hard
+
+"@digitaldefiance/eecp-cli-e2e@workspace:packages/eecp-cli-e2e":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-cli-e2e@workspace:packages/eecp-cli-e2e"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-cli@workspace:packages/eecp-cli":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-cli@workspace:packages/eecp-cli"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-client": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    commander: "npm:^14.0.2"
+    express: "npm:^4.21.2"
+  bin:
+    eecp: ./dist/cli.js
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-client@npm:^0.1.0, @digitaldefiance/eecp-client@workspace:packages/eecp-client":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-client@workspace:packages/eecp-client"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-crdt": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+    ws: "npm:^8.18.3"
+  peerDependencies:
+    react: ^19.2.0
+  peerDependenciesMeta:
+    react:
+      optional: true
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-crdt@npm:^0.1.0, @digitaldefiance/eecp-crdt@workspace:packages/eecp-crdt":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-crdt@workspace:packages/eecp-crdt"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+    yjs: "npm:^13.6.27"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-crypto@npm:^0.1.0, @digitaldefiance/eecp-crypto@workspace:packages/eecp-crypto":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-crypto@workspace:packages/eecp-crypto"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    tslib: "npm:^2.3.0"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-demo@workspace:packages/eecp-demo":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-demo@workspace:packages/eecp-demo"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-protocol@npm:^0.1.0, @digitaldefiance/eecp-protocol@workspace:packages/eecp-protocol":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-protocol@workspace:packages/eecp-protocol"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    tslib: "npm:^2.3.0"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-server-e2e@workspace:packages/eecp-server-e2e":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-server-e2e@workspace:packages/eecp-server-e2e"
+  languageName: unknown
+  linkType: soft
+
+"@digitaldefiance/eecp-server@workspace:packages/eecp-server":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-server@workspace:packages/eecp-server"
+  dependencies:
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    express: "npm:^4.21.2"
+    uuid: "npm:^13.0.0"
+    ws: "npm:^8.18.3"
+  languageName: unknown
+  linkType: soft
 
 "@digitaldefiance/express-suite-test-utils@npm:1.0.14":
   version: 1.0.14

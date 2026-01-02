@@ -6,7 +6,7 @@
  */
 
 import { EventEmitter } from 'events';
-import { MessageEnvelope } from '@digitaldefiance-eecp/eecp-protocol';
+import { MessageEnvelope } from '@digitaldefiance/eecp-protocol';
 import { BrowserTransport } from './browser-server.js';
 
 /**

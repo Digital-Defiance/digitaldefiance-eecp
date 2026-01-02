@@ -9,7 +9,7 @@ import { OperationRouter } from './lib/operation-router.js';
 import { TemporalCleanupService } from './lib/temporal-cleanup-service.js';
 import { RateLimiter } from './lib/rate-limiter.js';
 import { MetricsService } from './lib/metrics-service.js';
-import { ParticipantAuth, eciesConfig } from '@digitaldefiance-eecp/eecp-crypto';
+import { ParticipantAuth, eciesConfig } from '@digitaldefiance/eecp-crypto';
 import { ECIESService } from '@digitaldefiance/ecies-lib';
 
 const host = process.env.HOST ?? 'localhost';

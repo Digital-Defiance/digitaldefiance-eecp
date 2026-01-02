@@ -8,7 +8,7 @@ import { describe, it, expect } from '@jest/globals';
 import fc from 'fast-check';
 import { AuditLogger } from './audit-logger';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
-import type { AuditEventType } from '@digitaldefiance-eecp/eecp-protocol';
+import type { AuditEventType } from '@digitaldefiance/eecp-protocol';
 
 describe('AuditLogger Property Tests', () => {
   /**

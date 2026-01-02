@@ -1,23 +1,49 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-crypto",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-crypto",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "description": "Temporal key management and encryption primitives for EECP",
+  "keywords": [
+    "eecp",
+    "encryption",
+    "temporal-encryption",
+    "key-management",
+    "zero-knowledge",
+    "cryptography"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-crypto"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "@digitaldefiance/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
   "dependencies": {
-    "@digitaldefiance-eecp/eecp-protocol": "*",
-    "@digitaldefiance/ecies-lib": "^4.7.6",
+    "@digitaldefiance/ecies-lib": "^4.7.14",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
     "tslib": "^2.3.0"
   }
 }

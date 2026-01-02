@@ -1,10 +1,10 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-server-e2e",
+  "name": "@digitaldefiance/eecp-server-e2e",
   "version": "0.0.1",
   "private": true,
   "nx": {
     "implicitDependencies": [
-      "@digitaldefiance-eecp/eecp-server"
+      "@digitaldefiance/eecp-server"
     ],
     "targets": {
       "e2e": {
@@ -17,8 +17,8 @@
           "passWithNoTests": true
         },
         "dependsOn": [
-          "@digitaldefiance-eecp/eecp-server:build",
-          "@digitaldefiance-eecp/eecp-server:serve"
+          "@digitaldefiance/eecp-server:build",
+          "@digitaldefiance/eecp-server:serve"
         ]
       }
     }

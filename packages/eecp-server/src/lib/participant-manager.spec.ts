@@ -6,8 +6,8 @@
 
 import { Member, GuidV4, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 import { ParticipantManager } from './participant-manager';
-import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
-import { HandshakeMessage } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
+import { HandshakeMessage } from '@digitaldefiance/eecp-protocol';
 
 describe('ParticipantManager', () => {
   let manager: ParticipantManager;

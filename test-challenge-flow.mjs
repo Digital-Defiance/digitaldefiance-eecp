@@ -3,7 +3,7 @@
  */
 
 import { Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
-import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
+import { ParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
 
 async function test() {
   console.log('=== Testing Challenge Flow ===\n');

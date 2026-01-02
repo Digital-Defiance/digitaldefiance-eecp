@@ -20,17 +20,17 @@ import {
   MessageEnvelope,
   OperationMessage,
   EncryptedOperation,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import {
   TemporalKeyDerivation,
   TimeLockedEncryption,
-} from '@digitaldefiance-eecp/eecp-crypto';
+} from '@digitaldefiance/eecp-crypto';
 import {
   OperationEncryptor,
-} from '@digitaldefiance-eecp/eecp-crdt';
+} from '@digitaldefiance/eecp-crdt';
 import { generateKeyPairSync } from 'crypto';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
-import { generateUUID } from '@digitaldefiance-eecp/eecp-crdt';
+import { generateUUID } from '@digitaldefiance/eecp-crdt';
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 const mockWebSocket = null!;

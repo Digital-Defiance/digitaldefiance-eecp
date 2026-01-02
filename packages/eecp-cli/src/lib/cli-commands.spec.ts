@@ -8,8 +8,8 @@ import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import {
   WorkspaceConfig,
   WorkspaceMetadata,
-} from '@digitaldefiance-eecp/eecp-protocol';
-import { IEECPClient } from '@digitaldefiance-eecp/eecp-client';
+} from '@digitaldefiance/eecp-protocol';
+import { IEECPClient } from '@digitaldefiance/eecp-client';
 
 // Mock console methods
 const originalLog = console.log;

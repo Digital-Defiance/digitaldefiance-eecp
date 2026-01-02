@@ -7,7 +7,7 @@
  */
 
 import { randomBytes } from 'crypto';
-import { ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { Member } from '@digitaldefiance/ecies-lib';
 
 // Re-export shared ECIES configuration

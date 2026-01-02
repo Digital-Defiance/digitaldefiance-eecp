@@ -1,5 +1,5 @@
 import { TemporalKeyDerivation } from './temporal-key-derivation.js';
-import { TimeWindow } from '@digitaldefiance-eecp/eecp-protocol';
+import { TimeWindow } from '@digitaldefiance/eecp-protocol';
 
 describe('TemporalKeyDerivation Unit Tests', () => {
   const derivation = new TemporalKeyDerivation();

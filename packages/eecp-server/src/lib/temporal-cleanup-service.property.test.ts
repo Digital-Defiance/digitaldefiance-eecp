@@ -12,8 +12,8 @@ import {
   WorkspaceConfig,
   EncryptedOperation,
   ParticipantId,
-} from '@digitaldefiance-eecp/eecp-protocol';
-import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+} from '@digitaldefiance/eecp-protocol';
+import { IParticipantAuth } from '@digitaldefiance/eecp-crypto';
 import { ECIESService, Member, MemberType, EmailString, GuidV4 } from '@digitaldefiance/ecies-lib';
 
 /**

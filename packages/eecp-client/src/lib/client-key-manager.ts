@@ -49,8 +49,8 @@
 
 /// <reference lib="dom" />
 
-import { WorkspaceId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
-import { TemporalKey } from '@digitaldefiance-eecp/eecp-crypto';
+import { WorkspaceId, ParticipantId } from '@digitaldefiance/eecp-protocol';
+import { TemporalKey } from '@digitaldefiance/eecp-crypto';
 
 /**
  * Interface for client-side key management operations.

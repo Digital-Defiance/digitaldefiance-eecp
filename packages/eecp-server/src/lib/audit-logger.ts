@@ -11,7 +11,7 @@ import type {
   AuditLogEntry,
   EncryptedAuditLogEntry,
   AuditEventType,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 
 export interface IAuditLogger {
   /**

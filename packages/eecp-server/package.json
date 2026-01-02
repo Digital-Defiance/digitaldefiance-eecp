@@ -1,7 +1,33 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-server",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-server",
+  "version": "0.1.0",
+  "description": "Express + WebSocket server for EECP operation routing",
+  "keywords": [
+    "eecp",
+    "server",
+    "websocket",
+    "express",
+    "zero-knowledge",
+    "collaboration"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-server"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "nx": {
     "targets": {
       "build": {
@@ -83,15 +109,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@digitaldefiance-eecp/eecp-server:build",
+          "buildTarget": "@digitaldefiance/eecp-server:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@digitaldefiance-eecp/eecp-server:build:development"
+            "buildTarget": "@digitaldefiance/eecp-server:build:development"
           },
           "production": {
-            "buildTarget": "@digitaldefiance-eecp/eecp-server:build:production"
+            "buildTarget": "@digitaldefiance/eecp-server:build:production"
           }
         }
       },
@@ -103,8 +129,8 @@
     }
   },
   "dependencies": {
-    "@digitaldefiance-eecp/eecp-crypto": "*",
-    "@digitaldefiance-eecp/eecp-protocol": "*",
+    "@digitaldefiance/eecp-crypto": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
     "express": "^4.21.2",
     "uuid": "^13.0.0",
     "ws": "^8.18.3"

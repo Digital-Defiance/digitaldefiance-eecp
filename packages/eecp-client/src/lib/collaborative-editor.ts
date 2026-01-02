@@ -68,19 +68,19 @@ import {
   OperationMessage,
   CRDTOperation,
   EncryptedOperation,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import {
   EncryptedTextCRDT,
   IEncryptedTextCRDT,
   OperationEncryptor,
   IOperationEncryptor,
-} from '@digitaldefiance-eecp/eecp-crdt';
+} from '@digitaldefiance/eecp-crdt';
 import {
   TimeLockedEncryption,
   ITimeLockedEncryption,
-} from '@digitaldefiance-eecp/eecp-crypto';
+} from '@digitaldefiance/eecp-crypto';
 import { IClientKeyManager } from './client-key-manager.js';
-import { generateUUID } from '@digitaldefiance-eecp/eecp-crdt';
+import { generateUUID } from '@digitaldefiance/eecp-crdt';
 
 /**
  * Interface for collaborative editor operations.

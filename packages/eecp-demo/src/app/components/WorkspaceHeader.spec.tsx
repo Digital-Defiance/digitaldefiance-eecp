@@ -11,7 +11,7 @@
 
 import { render, screen, fireEvent, act } from '@testing-library/react';
 import { WorkspaceHeader } from './WorkspaceHeader';
-import { IWorkspaceClient } from '@digitaldefiance-eecp/eecp-client';
+import { IWorkspaceClient } from '@digitaldefiance/eecp-client';
 
 // Mock workspace client
 const createMockWorkspace = (expiresAt: number): IWorkspaceClient => ({

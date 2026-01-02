@@ -4,7 +4,7 @@
  */
 
 import { EncryptedTextCRDT } from './encrypted-text-crdt.js';
-import type { ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { generateUUID } from './uuid-utils.js';
 
 describe('EncryptedTextCRDT', () => {

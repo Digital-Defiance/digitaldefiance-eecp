@@ -7,8 +7,8 @@
 import * as fc from 'fast-check';
 import { Member, GuidV4, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 import { ParticipantManager } from './participant-manager.js';
-import { ParticipantAuth, eciesService } from '@digitaldefiance-eecp/eecp-crypto';
-import { HandshakeMessage } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantAuth, eciesService } from '@digitaldefiance/eecp-crypto';
+import { HandshakeMessage } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Helper function to create a test member with required parameters

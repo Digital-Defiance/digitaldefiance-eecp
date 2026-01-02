@@ -43,7 +43,7 @@ import {
   ParticipantId,
   WorkspaceMetadata,
   ParticipantInfo,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { IClientKeyManager } from './client-key-manager.js';
 import { CollaborativeEditor, ICollaborativeEditor } from './collaborative-editor.js';
 

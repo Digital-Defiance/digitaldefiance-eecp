@@ -15,25 +15,26 @@ import {
   OperationMessage,
   ChallengeMessage,
   CRDTOperation,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { GuidV4, Member, MemberType, EmailString } from '@digitaldefiance/ecies-lib';
 import { BrowserTransport } from './browser-server.js';
 import {
   EncryptedTextCRDT,
   OperationEncryptor,
-} from '@digitaldefiance-eecp/eecp-crdt';
+} from '@digitaldefiance/eecp-crdt';
 import {
   TimeLockedEncryption,
   TemporalKeyDerivation,
   TemporalKey,
   eciesService,
-} from '@digitaldefiance-eecp/eecp-crypto';
-import { ClientKeyManager } from '@digitaldefiance-eecp/eecp-client';
+} from '@digitaldefiance/eecp-crypto';
+import { ClientKeyManager } from '@digitaldefiance/eecp-client';
 
 /**
  * Recursively reconstruct GuidV4 and Buffer objects from parsed JSON
  * GuidV4 objects are serialized as objects with _value property
  * Buffer objects are serialized as { type: 'Buffer', data: [...] }
+ * Uint8Array objects are serialized as { 0: val, 1: val, ... } (numeric keys)
  */
 function reconstructGuidV4(obj: any): any {
   if (obj === null || obj === undefined) {
@@ -42,7 +43,20 @@ function reconstructGuidV4(obj: any): any {
   
   // Check if this looks like a serialized Buffer
   if (typeof obj === 'object' && obj.type === 'Buffer' && Array.isArray(obj.data)) {
-    return Buffer.from(obj.data);
+    return new Uint8Array(obj.data);
+  }
+  
+  // Check if this looks like a serialized Uint8Array (object with only numeric keys)
+  if (typeof obj === 'object' && !Array.isArray(obj) && obj.type !== 'Buffer' && obj._value === undefined) {
+    const keys = Object.keys(obj);
+    if (keys.length > 0 && keys.every(k => /^\d+$/.test(k))) {
+      // This is a Uint8Array serialized as {0: val, 1: val, ...}
+      const arr = new Uint8Array(keys.length);
+      for (const key of keys) {
+        arr[parseInt(key)] = obj[key];
+      }
+      return arr;
+    }
   }
   
   // Check if this looks like a serialized GuidV4
@@ -249,7 +263,7 @@ export class BrowserEECPClient {
     this.transport.on('message', async (data: string) => {
       try {
         const parsed = JSON.parse(data);
-        // Reconstruct GuidV4 objects that were lost during JSON serialization
+        // Reconstruct GuidV4 and Buffer objects that were lost during JSON serialization
         const envelope: MessageEnvelope = reconstructGuidV4(parsed);
 
         if (envelope.type === 'operation') {
@@ -268,8 +282,13 @@ export class BrowserEECPClient {
     try {
       const encrypted = message.operation;
 
-      // Skip own operations - compare as hex strings
-      if (encrypted.participantId.asFullHexGuid === this.participantId?.asFullHexGuid) {
+      // Skip own operations - compare as strings to handle both GuidV4 and mock objects
+      const encryptedIdStr = typeof encrypted.participantId === 'object' && encrypted.participantId.asFullHexGuid
+        ? encrypted.participantId.asFullHexGuid
+        : encrypted.participantId.toString();
+      const myIdStr = this.participantId?.asFullHexGuid || this.participantId?.toString();
+      
+      if (encryptedIdStr === myIdStr) {
         return;
       }
 

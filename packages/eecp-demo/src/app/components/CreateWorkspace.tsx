@@ -9,8 +9,8 @@
 
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
-import { WorkspaceConfig } from '@digitaldefiance-eecp/eecp-protocol';
+import { EECPClient } from '@digitaldefiance/eecp-client';
+import { WorkspaceConfig } from '@digitaldefiance/eecp-protocol';
 
 // Generate UUID using browser's crypto API (RFC 4122 version 4)
 function generateUUID(): string {

@@ -4,7 +4,7 @@
  */
 
 import { TemporalGarbageCollector } from './temporal-garbage-collector';
-import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation, OperationId, ParticipantId } from '@digitaldefiance/eecp-protocol';
 import { generateUUID } from './uuid-utils.js';
 
 describe('TemporalGarbageCollector', () => {

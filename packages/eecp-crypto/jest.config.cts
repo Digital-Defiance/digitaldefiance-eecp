@@ -10,7 +10,7 @@ const swcJestConfig = JSON.parse(
 swcJestConfig.swcrc = false;
 
 module.exports = {
-  displayName: '@digitaldefiance-eecp/eecp-crypto',
+  displayName: '@digitaldefiance/eecp-crypto',
   preset: '../../jest.preset.js',
   testEnvironment: 'node',
   transform: {

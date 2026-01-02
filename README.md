@@ -124,7 +124,7 @@ node packages/eecp-cli/dist/main.js join <workspace-id> <workspace-key>
 ### Creating a Workspace
 
 ```typescript
-import { EECPClient } from '@digitaldefiance-eecp/eecp-client';
+import { EECPClient } from '@digitaldefiance/eecp-client';
 
 const client = new EECPClient('ws://localhost:3000');
 await client.connect();
@@ -161,7 +161,7 @@ editor.onChange((text) => {
 ### React Integration
 
 ```typescript
-import { useWorkspace, useCollaboration } from '@digitaldefiance-eecp/eecp-client';
+import { useWorkspace, useCollaboration } from '@digitaldefiance/eecp-client';
 
 function CollaborativeEditor() {
   const { workspace, loading, error } = useWorkspace(
@@ -371,7 +371,7 @@ npx nx lint eecp-client --fix
 
 ```bash
 # Generate a new library
-npx nx g @nx/js:lib packages/my-lib --publishable --importPath=@digitaldefiance-eecp/my-lib
+npx nx g @nx/js:lib packages/my-lib --publishable --importPath=@digitaldefiance/my-lib
 
 # Generate a new component
 npx nx g @nx/react:component MyComponent --project=eecp-demo

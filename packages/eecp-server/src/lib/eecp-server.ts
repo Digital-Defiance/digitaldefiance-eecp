@@ -19,12 +19,12 @@
  * 
  * @example
  * ```typescript
- * import { EECPServer } from '@digitaldefiance-eecp/eecp-server';
+ * import { EECPServer } from '@digitaldefiance/eecp-server';
  * import { WorkspaceManager } from './workspace-manager';
  * import { ParticipantManager } from './participant-manager';
  * import { OperationRouter } from './operation-router';
  * import { TemporalCleanupService } from './temporal-cleanup-service';
- * import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+ * import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
  * import { RateLimiter } from './rate-limiter';
  * import { MetricsService } from './metrics-service';
  * 
@@ -66,7 +66,7 @@ import {
   WorkspaceConfig,
   WorkspaceId,
   EncryptedOperation,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import {
   MessageEnvelope,
   MessageType,
@@ -79,13 +79,13 @@ import {
   SyncResponseMessage,
   ErrorMessage,
   ErrorCode,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 import { GuidV4 } from '@digitaldefiance/ecies-lib';
 import { IWorkspaceManager } from './workspace-manager.js';
 import { IParticipantManager, ParticipantSession } from './participant-manager.js';
 import { IOperationRouter } from './operation-router.js';
 import { ITemporalCleanupService } from './temporal-cleanup-service.js';
-import { IParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+import { IParticipantAuth } from '@digitaldefiance/eecp-crypto';
 import { IRateLimiter } from './rate-limiter.js';
 import { IMetricsService } from './metrics-service.js';
 

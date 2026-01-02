@@ -1,25 +1,53 @@
 {
-  "name": "@digitaldefiance-eecp/eecp-client",
-  "version": "0.0.1",
-  "private": true,
+  "name": "@digitaldefiance/eecp-client",
+  "version": "0.1.0",
   "type": "module",
   "main": "./dist/index.js",
   "module": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "description": "Browser client library with React hooks for EECP",
+  "keywords": [
+    "eecp",
+    "client",
+    "browser",
+    "react",
+    "hooks",
+    "websocket",
+    "collaboration",
+    "encryption"
+  ],
+  "license": "MIT",
+  "author": "Digital Defiance",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/digitaldefiance/eecp-lib.git",
+    "directory": "packages/eecp-client"
+  },
+  "bugs": {
+    "url": "https://github.com/digitaldefiance/eecp-lib/issues"
+  },
+  "homepage": "https://github.com/digitaldefiance/eecp-lib#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@digitaldefiance-eecp/source": "./src/index.ts",
+      "@digitaldefiance/source": "./src/index.ts",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"
     }
   },
   "dependencies": {
-    "@digitaldefiance-eecp/eecp-crdt": "0.0.1",
-    "@digitaldefiance-eecp/eecp-crypto": "0.0.1",
-    "@digitaldefiance-eecp/eecp-protocol": "0.0.1",
     "@digitaldefiance/ecies-lib": "^4.7.14",
+    "@digitaldefiance/eecp-crdt": "^0.1.0",
+    "@digitaldefiance/eecp-crypto": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
     "tslib": "^2.3.0",
     "ws": "^8.18.3"
   },

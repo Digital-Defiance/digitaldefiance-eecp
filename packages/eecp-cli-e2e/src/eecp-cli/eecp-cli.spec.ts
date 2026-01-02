@@ -5,13 +5,13 @@
  */
 
 import { spawn, ChildProcess } from 'child_process';
-import { EECPServer } from '@digitaldefiance-eecp/eecp-server/src/lib/eecp-server';
-import { WorkspaceManager } from '@digitaldefiance-eecp/eecp-server/src/lib/workspace-manager';
-import { ParticipantManager } from '@digitaldefiance-eecp/eecp-server/src/lib/participant-manager';
-import { OperationRouter } from '@digitaldefiance-eecp/eecp-server/src/lib/operation-router';
-import { TemporalCleanupService } from '@digitaldefiance-eecp/eecp-server/src/lib/temporal-cleanup-service';
-import { RateLimiter } from '@digitaldefiance-eecp/eecp-server/src/lib/rate-limiter';
-import { ParticipantAuth } from '@digitaldefiance-eecp/eecp-crypto';
+import { EECPServer } from '@digitaldefiance/eecp-server/src/lib/eecp-server';
+import { WorkspaceManager } from '@digitaldefiance/eecp-server/src/lib/workspace-manager';
+import { ParticipantManager } from '@digitaldefiance/eecp-server/src/lib/participant-manager';
+import { OperationRouter } from '@digitaldefiance/eecp-server/src/lib/operation-router';
+import { TemporalCleanupService } from '@digitaldefiance/eecp-server/src/lib/temporal-cleanup-service';
+import { RateLimiter } from '@digitaldefiance/eecp-server/src/lib/rate-limiter';
+import { ParticipantAuth } from '@digitaldefiance/eecp-crypto';
 import * as path from 'path';
 
 describe('EECP CLI Integration Tests', () => {

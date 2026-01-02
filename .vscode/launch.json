@@ -4,9 +4,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @digitaldefiance-eecp/eecp-server with Nx",
+      "name": "Debug @digitaldefiance/eecp-server with Nx",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["nx", "serve", "@digitaldefiance-eecp/eecp-server"],
+      "runtimeArgs": ["nx", "serve", "@digitaldefiance/eecp-server"],
       "env": {
         "NODE_OPTIONS": "--inspect=9229"
       },
@@ -22,9 +22,9 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Debug @digitaldefiance-eecp/eecp-cli with Nx",
+      "name": "Debug @digitaldefiance/eecp-cli with Nx",
       "runtimeExecutable": "yarn",
-      "runtimeArgs": ["nx", "serve", "@digitaldefiance-eecp/eecp-cli"],
+      "runtimeArgs": ["nx", "serve", "@digitaldefiance/eecp-cli"],
       "env": {
         "NODE_OPTIONS": "--inspect=9230"
       },

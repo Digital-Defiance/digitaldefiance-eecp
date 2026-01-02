@@ -19,7 +19,7 @@
  * @module crdt-sync-engine
  */
 
-import type { CRDTOperation, OperationId } from '@digitaldefiance-eecp/eecp-protocol';
+import type { CRDTOperation, OperationId } from '@digitaldefiance/eecp-protocol';
 
 /**
  * Interface for CRDT synchronization engine operations

@@ -20,7 +20,7 @@ import type {
   ParticipantId,
   WorkspaceMetadata,
   ParticipantInfo,
-} from '@digitaldefiance-eecp/eecp-protocol';
+} from '@digitaldefiance/eecp-protocol';
 
 // Mock the EECPClient
 jest.mock('./eecp-client.js');

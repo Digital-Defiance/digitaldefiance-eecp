@@ -11,7 +11,7 @@
 
 import { render, screen } from '@testing-library/react';
 import { ParticipantSidebar } from './ParticipantSidebar';
-import { ParticipantInfo } from '@digitaldefiance-eecp/eecp-protocol';
+import { ParticipantInfo } from '@digitaldefiance/eecp-protocol';
 
 describe('ParticipantSidebar', () => {
   it('should render empty state when no participants', () => {

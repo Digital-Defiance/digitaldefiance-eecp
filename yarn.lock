@@ -1668,6 +1668,27 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@digitaldefiance/eecp-browser@workspace:packages/eecp-browser":
+  version: 0.0.0-use.local
+  resolution: "@digitaldefiance/eecp-browser@workspace:packages/eecp-browser"
+  dependencies:
+    "@digitaldefiance/ecies-lib": "npm:^4.7.14"
+    "@digitaldefiance/eecp-client": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crdt": "npm:^0.1.0"
+    "@digitaldefiance/eecp-crypto": "npm:^0.1.0"
+    "@digitaldefiance/eecp-protocol": "npm:^0.1.0"
+    "@types/node": "npm:^20.19.9"
+    "@vitest/ui": "npm:^4.0.0"
+    events: "npm:^3.3.0"
+    fake-indexeddb: "npm:^6.2.5"
+    tslib: "npm:^2.8.1"
+    typescript: "npm:~5.9.2"
+    vitest: "npm:^4.0.0"
+  peerDependencies:
+    buffer: ^6.0.3
+  languageName: unknown
+  linkType: soft
+
 "@digitaldefiance/eecp-cli-e2e@workspace:packages/eecp-cli-e2e":
   version: 0.0.0-use.local
   resolution: "@digitaldefiance/eecp-cli-e2e@workspace:packages/eecp-cli-e2e"
@@ -6207,6 +6228,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/node@npm:^20.19.9":
+  version: 20.19.27
+  resolution: "@types/node@npm:20.19.27"
+  dependencies:
+    undici-types: "npm:~6.21.0"
+  checksum: 10c0/7599c24d80465c1aa6e29b53581fc20ad8862ff33e6eef31d05c1c706868476ee57319c89b802ea972dd4d64ce86d18020aa5344f851fb59b730ea509a63300f
+  languageName: node
+  linkType: hard
+
 "@types/parse-json@npm:^4.0.0":
   version: 4.0.2
   resolution: "@types/parse-json@npm:4.0.2"
@@ -10437,7 +10467,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"events@npm:^3.0.0, events@npm:^3.2.0":
+"events@npm:^3.0.0, events@npm:^3.2.0, events@npm:^3.3.0":
   version: 3.3.0
   resolution: "events@npm:3.3.0"
   checksum: 10c0/d6b6f2adbccbcda74ddbab52ed07db727ef52e31a61ed26db9feb7dc62af7fc8e060defa65e5f8af9449b86b52cc1a1f6a79f2eafcf4e62add2b7a1fa4a432f6

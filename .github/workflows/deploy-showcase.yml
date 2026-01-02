@@ -32,11 +32,13 @@ jobs:
       - name: Enable Corepack
         run: corepack enable
 
-      - name: Install dependencies
-        working-directory: ./showcase
+      - name: Install dependencies (root)
         run: yarn install --immutable
 
-      - name: Build
+      - name: Build packages
+        run: yarn build
+
+      - name: Build showcase
         working-directory: ./showcase
         run: yarn build
 

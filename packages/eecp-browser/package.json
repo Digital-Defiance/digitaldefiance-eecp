@@ -1,0 +1,57 @@
+{
+  "name": "@digitaldefiance/eecp-browser",
+  "version": "0.1.0",
+  "description": "Browser-compatible EECP client and server implementations",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "clean": "rm -rf dist",
+    "test": "vitest --run"
+  },
+  "keywords": [
+    "eecp",
+    "encryption",
+    "collaboration",
+    "browser",
+    "crdt"
+  ],
+  "author": "Digital Defiance",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Digital-Defiance/digitaldefiance-eecp.git",
+    "directory": "packages/eecp-browser"
+  },
+  "dependencies": {
+    "@digitaldefiance/ecies-lib": "^4.7.14",
+    "@digitaldefiance/eecp-client": "^0.1.0",
+    "@digitaldefiance/eecp-crdt": "^0.1.0",
+    "@digitaldefiance/eecp-crypto": "^0.1.0",
+    "@digitaldefiance/eecp-protocol": "^0.1.0",
+    "events": "^3.3.0",
+    "tslib": "^2.8.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.9",
+    "@vitest/ui": "^4.0.0",
+    "fake-indexeddb": "^6.2.5",
+    "typescript": "~5.9.2",
+    "vitest": "^4.0.0"
+  },
+  "peerDependencies": {
+    "buffer": "^6.0.3"
+  }
+}

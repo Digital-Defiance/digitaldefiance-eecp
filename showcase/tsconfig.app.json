@@ -22,19 +22,5 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true
   },
-  "include": ["src"],
-  "references": [
-    {
-      "path": "../packages/eecp-client/tsconfig.lib.json"
-    },
-    {
-      "path": "../packages/eecp-crypto/tsconfig.lib.json"
-    },
-    {
-      "path": "../packages/eecp-crdt/tsconfig.lib.json"
-    },
-    {
-      "path": "../packages/eecp-protocol/tsconfig.lib.json"
-    }
-  ]
+  "include": ["src"]
 }

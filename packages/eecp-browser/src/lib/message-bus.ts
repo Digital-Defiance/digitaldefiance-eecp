@@ -7,7 +7,7 @@
 
 import { EventEmitter } from 'events';
 import { MessageEnvelope } from '@digitaldefiance/eecp-protocol';
-import { BrowserTransport } from './browser-server.js';
+import { BrowserTransport } from './browser-server';
 
 /**
  * Message bus for client-server communication
